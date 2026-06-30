@@ -4,79 +4,101 @@
   <meta charset="UTF-8" />
   <title>Life HQ Flip Clock</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       width: 100%;
       height: 100vh;
       overflow: hidden;
       font-family: "Poppins", sans-serif;
-      color: #ffe6f2;
       background:
-        radial-gradient(circle at 15% 80%, rgba(255, 122, 185, 0.35), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(255, 170, 210, 0.22), transparent 25%),
-        linear-gradient(135deg, #050005 0%, #160812 45%, #090006 100%);
+        radial-gradient(circle at 15% 75%, rgba(255, 148, 195, .28), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(255, 120, 185, .18), transparent 25%),
+        linear-gradient(135deg, #050103 0%, #170811 45%, #050103 100%);
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #ffd8eb;
     }
 
     .widget {
       width: 100%;
       height: 100vh;
-      padding: 28px;
-      border: 1px solid rgba(255, 154, 205, 0.45);
+      padding: 20px;
+      border: 1px solid rgba(255, 150, 205, .55);
       background:
-        linear-gradient(rgba(15, 3, 12, 0.78), rgba(15, 3, 12, 0.85)),
-        radial-gradient(circle at top, rgba(255, 118, 190, 0.25), transparent 45%);
+        linear-gradient(rgba(10, 2, 8, .72), rgba(10, 2, 8, .86)),
+        radial-gradient(circle at center, rgba(255, 120, 190, .22), transparent 48%);
       box-shadow:
-        inset 0 0 45px rgba(255, 105, 190, 0.18),
-        0 0 35px rgba(255, 100, 190, 0.25);
+        inset 0 0 70px rgba(255, 96, 180, .20),
+        0 0 38px rgba(255, 90, 180, .28);
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    .top {
+    .widget::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.18) 1px, transparent 1px);
+      background-size: 55px 55px;
+      opacity: .08;
+      pointer-events: none;
+    }
+
+    .decor {
+      position: absolute;
+      opacity: .22;
+      filter: drop-shadow(0 0 18px #ff72b8);
+      font-size: 90px;
+    }
+
+    .rose { top: 18px; right: 26px; }
+    .candle { bottom: 18px; left: 26px; }
+
+    .title {
       font-family: "Playfair Display", serif;
-      font-size: 42px;
-      letter-spacing: 4px;
-      color: #ffc2dc;
-      text-shadow: 0 0 18px rgba(255, 115, 195, 0.8);
-      margin-bottom: 28px;
+      font-size: 46px;
+      letter-spacing: 6px;
+      color: #ffc7dd;
+      text-shadow: 0 0 18px rgba(255, 111, 185, .75);
+      margin-bottom: 26px;
+      z-index: 2;
     }
 
     .clock {
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
+      gap: 18px;
+      z-index: 2;
     }
 
     .flip {
-      width: 165px;
-      height: 135px;
-      border-radius: 20px;
+      width: 190px;
+      height: 150px;
+      border-radius: 22px;
       background:
-        linear-gradient(180deg, rgba(255, 170, 215, 0.18), rgba(255, 64, 160, 0.08)),
-        linear-gradient(135deg, #1b0714, #2a0b20);
-      border: 2px solid rgba(255, 147, 205, 0.9);
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.01)),
+        linear-gradient(135deg, #0a0207, #1d0915 55%, #080105);
+      border: 2px solid rgba(255, 155, 205, .95);
       box-shadow:
-        0 0 22px rgba(255, 88, 180, 0.85),
-        inset 0 0 22px rgba(255, 128, 195, 0.18),
-        0 16px 35px rgba(0, 0, 0, 0.65);
+        0 0 24px rgba(255, 89, 175, .95),
+        inset 0 0 28px rgba(255, 130, 195, .16),
+        0 18px 45px rgba(0, 0, 0, .75);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
+      animation: softGlow 2.5s ease-in-out infinite alternate;
     }
 
     .flip::before {
@@ -85,141 +107,129 @@
       top: 50%;
       left: 0;
       width: 100%;
-      height: 2px;
-      background: rgba(0, 0, 0, 0.65);
-      box-shadow: 0 0 6px rgba(255, 180, 220, 0.5);
-      z-index: 2;
+      height: 3px;
+      background: rgba(0,0,0,.85);
+      box-shadow: 0 0 8px rgba(255, 160, 210, .5);
+      z-index: 3;
     }
 
     .flip::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: rgba(255, 255, 255, 0.04);
+      top: 50%;
+      left: 8px;
+      right: 8px;
+      height: 1px;
+      background: rgba(255, 195, 225, .28);
+      z-index: 4;
     }
 
     .num {
-      font-size: 88px;
+      font-size: 104px;
       font-weight: 800;
       color: #ffc1dc;
       text-shadow:
-        0 0 12px rgba(255, 125, 200, 0.9),
-        0 0 24px rgba(255, 80, 170, 0.6);
-      z-index: 3;
+        0 0 12px rgba(255, 135, 205, .95),
+        0 0 26px rgba(255, 67, 165, .70);
+      z-index: 5;
+      line-height: 1;
     }
 
     .colon {
-      font-size: 72px;
+      font-size: 78px;
       font-weight: 800;
-      color: #ff9fcb;
-      text-shadow: 0 0 18px rgba(255, 105, 190, 0.9);
+      color: #ff9dca;
+      text-shadow: 0 0 18px rgba(255, 88, 180, .9);
+      z-index: 2;
     }
 
     .ampm {
-      width: 92px;
-      height: 110px;
+      width: 95px;
+      height: 120px;
       border-radius: 18px;
-      border: 2px solid rgba(255, 147, 205, 0.9);
-      background: linear-gradient(135deg, #1b0714, #2a0b20);
-      box-shadow: 0 0 22px rgba(255, 88, 180, 0.75);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.01)),
+        linear-gradient(135deg, #0a0207, #1d0915 55%, #080105);
+      border: 2px solid rgba(255, 155, 205, .95);
+      box-shadow:
+        0 0 22px rgba(255, 89, 175, .85),
+        inset 0 0 18px rgba(255, 130, 195, .12);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      font-weight: 800;
       color: #ffc1dc;
+      font-size: 33px;
+      font-weight: 800;
+      z-index: 2;
     }
 
     .date {
-      margin-top: 28px;
+      margin-top: 24px;
       font-family: "Playfair Display", serif;
       font-size: 34px;
       font-style: italic;
-      color: #ffadd2;
-      text-shadow: 0 0 12px rgba(255, 115, 195, 0.65);
+      color: #ffafd2;
+      text-shadow: 0 0 12px rgba(255, 120, 190, .65);
+      z-index: 2;
     }
 
     .divider {
-      margin: 14px 0 10px;
-      color: #ff9fcb;
-      letter-spacing: 10px;
+      margin-top: 10px;
+      color: #ff9fcf;
+      letter-spacing: 8px;
+      z-index: 2;
     }
 
     .quote {
+      margin-top: 10px;
       font-family: "Playfair Display", serif;
       font-size: 24px;
       font-style: italic;
-      color: #ffd6e8;
+      color: #ffe0ee;
+      text-shadow: 0 0 10px rgba(255, 120, 190, .45);
+      z-index: 2;
     }
 
-    .corner {
-      position: absolute;
-      font-size: 82px;
-      opacity: 0.22;
-      filter: drop-shadow(0 0 12px #ff7abf);
+    .flip-animate {
+      animation: flip .45s ease;
     }
 
-    .left {
-      left: 28px;
-      bottom: 22px;
+    @keyframes flip {
+      0% { transform: rotateX(0deg); }
+      50% { transform: rotateX(-18deg) scale(.98); }
+      100% { transform: rotateX(0deg); }
     }
 
-    .right {
-      right: 28px;
-      top: 22px;
+    @keyframes softGlow {
+      from { box-shadow: 0 0 18px rgba(255, 89, 175, .7), inset 0 0 25px rgba(255, 130, 195, .12), 0 18px 45px rgba(0,0,0,.75); }
+      to { box-shadow: 0 0 32px rgba(255, 89, 175, 1), inset 0 0 34px rgba(255, 130, 195, .2), 0 18px 45px rgba(0,0,0,.75); }
     }
 
-    @media (max-width: 800px) {
-      .flip {
-        width: 105px;
-        height: 95px;
-      }
-
-      .num {
-        font-size: 58px;
-      }
-
-      .colon {
-        font-size: 48px;
-      }
-
-      .ampm {
-        width: 65px;
-        height: 80px;
-        font-size: 22px;
-      }
-
-      .top {
-        font-size: 30px;
-      }
-
-      .date {
-        font-size: 24px;
-      }
-
-      .quote {
-        font-size: 18px;
-      }
+    @media (max-width: 900px) {
+      .flip { width: 128px; height: 105px; }
+      .num { font-size: 68px; }
+      .colon { font-size: 52px; }
+      .ampm { width: 68px; height: 86px; font-size: 24px; }
+      .title { font-size: 32px; }
+      .date { font-size: 24px; }
+      .quote { font-size: 18px; }
     }
   </style>
 </head>
 
 <body>
   <div class="widget">
-    <div class="corner right">🌹</div>
-    <div class="corner left">🕯️</div>
+    <div class="decor rose">🌹</div>
+    <div class="decor candle">🕯️</div>
 
-    <div class="top">♡ LIFE HQ ♡</div>
+    <div class="title">LIFE HQ</div>
 
     <div class="clock">
-      <div class="flip"><div class="num" id="hours">00</div></div>
+      <div class="flip" id="hBox"><div class="num" id="hours">00</div></div>
       <div class="colon">:</div>
-      <div class="flip"><div class="num" id="minutes">00</div></div>
+      <div class="flip" id="mBox"><div class="num" id="minutes">00</div></div>
       <div class="colon">:</div>
-      <div class="flip"><div class="num" id="seconds">00</div></div>
+      <div class="flip" id="sBox"><div class="num" id="seconds">00</div></div>
       <div class="ampm" id="ampm">AM</div>
     </div>
 
@@ -229,19 +239,46 @@
   </div>
 
   <script>
+    let lastHours = "";
+    let lastMinutes = "";
+    let lastSeconds = "";
+
+    function flipBox(id) {
+      const box = document.getElementById(id);
+      box.classList.remove("flip-animate");
+      void box.offsetWidth;
+      box.classList.add("flip-animate");
+    }
+
     function updateClock() {
       const now = new Date();
 
       let hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const seconds = String(now.getSeconds()).padStart(2, "0");
       const ampm = hours >= 12 ? "PM" : "AM";
 
       hours = hours % 12 || 12;
+      hours = String(hours).padStart(2, "0");
 
-      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+      if (hours !== lastHours) {
+        document.getElementById("hours").textContent = hours;
+        flipBox("hBox");
+        lastHours = hours;
+      }
+
+      if (minutes !== lastMinutes) {
+        document.getElementById("minutes").textContent = minutes;
+        flipBox("mBox");
+        lastMinutes = minutes;
+      }
+
+      if (seconds !== lastSeconds) {
+        document.getElementById("seconds").textContent = seconds;
+        flipBox("sBox");
+        lastSeconds = seconds;
+      }
+
       document.getElementById("ampm").textContent = ampm;
 
       document.getElementById("date").textContent =
