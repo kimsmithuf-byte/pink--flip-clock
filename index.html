@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Life HQ Flip Clock</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+      color: #ffe6f2;
+      background:
+        radial-gradient(circle at 15% 80%, rgba(255, 122, 185, 0.35), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(255, 170, 210, 0.22), transparent 25%),
+        linear-gradient(135deg, #050005 0%, #160812 45%, #090006 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .widget {
+      width: 100%;
+      height: 100vh;
+      padding: 28px;
+      border: 1px solid rgba(255, 154, 205, 0.45);
+      background:
+        linear-gradient(rgba(15, 3, 12, 0.78), rgba(15, 3, 12, 0.85)),
+        radial-gradient(circle at top, rgba(255, 118, 190, 0.25), transparent 45%);
+      box-shadow:
+        inset 0 0 45px rgba(255, 105, 190, 0.18),
+        0 0 35px rgba(255, 100, 190, 0.25);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .top {
+      font-family: "Playfair Display", serif;
+      font-size: 42px;
+      letter-spacing: 4px;
+      color: #ffc2dc;
+      text-shadow: 0 0 18px rgba(255, 115, 195, 0.8);
+      margin-bottom: 28px;
+    }
+
+    .clock {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .flip {
+      width: 165px;
+      height: 135px;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 170, 215, 0.18), rgba(255, 64, 160, 0.08)),
+        linear-gradient(135deg, #1b0714, #2a0b20);
+      border: 2px solid rgba(255, 147, 205, 0.9);
+      box-shadow:
+        0 0 22px rgba(255, 88, 180, 0.85),
+        inset 0 0 22px rgba(255, 128, 195, 0.18),
+        0 16px 35px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flip::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.65);
+      box-shadow: 0 0 6px rgba(255, 180, 220, 0.5);
+      z-index: 2;
+    }
+
+    .flip::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .num {
+      font-size: 88px;
+      font-weight: 800;
+      color: #ffc1dc;
+      text-shadow:
+        0 0 12px rgba(255, 125, 200, 0.9),
+        0 0 24px rgba(255, 80, 170, 0.6);
+      z-index: 3;
+    }
+
+    .colon {
+      font-size: 72px;
+      font-weight: 800;
+      color: #ff9fcb;
+      text-shadow: 0 0 18px rgba(255, 105, 190, 0.9);
+    }
+
+    .ampm {
+      width: 92px;
+      height: 110px;
+      border-radius: 18px;
+      border: 2px solid rgba(255, 147, 205, 0.9);
+      background: linear-gradient(135deg, #1b0714, #2a0b20);
+      box-shadow: 0 0 22px rgba(255, 88, 180, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffc1dc;
+    }
+
+    .date {
+      margin-top: 28px;
+      font-family: "Playfair Display", serif;
+      font-size: 34px;
+      font-style: italic;
+      color: #ffadd2;
+      text-shadow: 0 0 12px rgba(255, 115, 195, 0.65);
+    }
+
+    .divider {
+      margin: 14px 0 10px;
+      color: #ff9fcb;
+      letter-spacing: 10px;
+    }
+
+    .quote {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      font-style: italic;
+      color: #ffd6e8;
+    }
+
+    .corner {
+      position: absolute;
+      font-size: 82px;
+      opacity: 0.22;
+      filter: drop-shadow(0 0 12px #ff7abf);
+    }
+
+    .left {
+      left: 28px;
+      bottom: 22px;
+    }
+
+    .right {
+      right: 28px;
+      top: 22px;
+    }
+
+    @media (max-width: 800px) {
+      .flip {
+        width: 105px;
+        height: 95px;
+      }
+
+      .num {
+        font-size: 58px;
+      }
+
+      .colon {
+        font-size: 48px;
+      }
+
+      .ampm {
+        width: 65px;
+        height: 80px;
+        font-size: 22px;
+      }
+
+      .top {
+        font-size: 30px;
+      }
+
+      .date {
+        font-size: 24px;
+      }
+
+      .quote {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="widget">
+    <div class="corner right">🌹</div>
+    <div class="corner left">🕯️</div>
+
+    <div class="top">♡ LIFE HQ ♡</div>
+
+    <div class="clock">
+      <div class="flip"><div class="num" id="hours">00</div></div>
+      <div class="colon">:</div>
+      <div class="flip"><div class="num" id="minutes">00</div></div>
+      <div class="colon">:</div>
+      <div class="flip"><div class="num" id="seconds">00</div></div>
+      <div class="ampm" id="ampm">AM</div>
+    </div>
+
+    <div class="date" id="date"></div>
+    <div class="divider">♡ ─ ♡ ─ ♡</div>
+    <div class="quote">discipline today, freedom tomorrow ✨</div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const ampm = hours >= 12 ? "PM" : "AM";
+
+      hours = hours % 12 || 12;
+
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+      document.getElementById("ampm").textContent = ampm;
+
+      document.getElementById("date").textContent =
+        now.toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        });
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
