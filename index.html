@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Pink Flip Clock</title>
+
 <style>
 html, body {
   margin: 0;
@@ -12,7 +13,10 @@ html, body {
   background: #050005;
 }
 
-body {
+.widget {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   background-image: url("background.png");
   background-size: cover;
   background-position: center;
@@ -21,38 +25,44 @@ body {
 
 .clock {
   position: absolute;
-  left: 35%;
-  top: 58.5%;
-  transform: translateY(-50%);
+  left: 50%;
+  top: 63.5%;
+  transform: translate(-50%, -50%);
+  width: 58%;
+  height: 18%;
+
   display: flex;
   align-items: center;
-  gap: 2.3vw;
+  justify-content: center;
+  gap: 2.1vw;
+
   font-family: Georgia, serif;
-  color: #ffd1ea;
-  text-shadow: 0 0 14px #ff38a8, 0 0 30px #ff38a8;
   font-weight: bold;
-  animation: breathe 3.5s ease-in-out infinite;
+  color: #ffd5ec;
+  text-shadow:
+    0 0 8px #ff4eb3,
+    0 0 18px #ff4eb3,
+    0 0 35px #ff4eb3;
 }
 
 .num {
-  min-width: 9vw;
+  min-width: 8vw;
   text-align: center;
-  font-size: 7.1vw;
+  font-size: 6.2vw;
   line-height: 1;
 }
 
 .colon {
-  font-size: 6.1vw;
+  font-size: 5.6vw;
   line-height: 1;
-  color: #ff8ac9;
-  text-shadow: 0 0 18px #ff38a8, 0 0 35px #ff38a8;
-  margin-top: -0.4vw;
+  margin-top: -0.3vw;
 }
 
 .ampm {
-  font-size: 3vw;
-  margin-left: -1vw;
-  margin-top: -1.8vw;
+  font-size: 2.5vw;
+  line-height: 1;
+  margin-left: -0.4vw;
+  margin-top: -1.4vw;
 }
 
 .flip {
@@ -64,22 +74,19 @@ body {
   50% { transform: rotateX(90deg); opacity: .55; }
   100% { transform: rotateX(0deg); opacity: 1; }
 }
-
-@keyframes breathe {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.18); }
-}
 </style>
 </head>
 
 <body>
-  <div class="clock">
-    <div class="num" id="h">00</div>
-    <div class="colon">:</div>
-    <div class="num" id="m">00</div>
-    <div class="colon">:</div>
-    <div class="num" id="s">00</div>
-    <div class="ampm" id="ampm">PM</div>
+  <div class="widget">
+    <div class="clock">
+      <div class="num" id="h">00</div>
+      <div class="colon">:</div>
+      <div class="num" id="m">00</div>
+      <div class="colon">:</div>
+      <div class="num" id="s">00</div>
+      <div class="ampm" id="ampm">PM</div>
+    </div>
   </div>
 
 <script>
@@ -87,6 +94,7 @@ let last = {};
 
 function updateClock() {
   const now = new Date();
+
   let h = now.getHours();
   const ampm = h >= 12 ? "PM" : "AM";
   h = h % 12 || 12;
@@ -95,11 +103,12 @@ function updateClock() {
     h: String(h).padStart(2, "0"),
     m: String(now.getMinutes()).padStart(2, "0"),
     s: String(now.getSeconds()).padStart(2, "0"),
-    ampm
+    ampm: ampm
   };
 
-  Object.keys(values).forEach(id => {
+  for (const id in values) {
     const el = document.getElementById(id);
+
     if (last[id] !== values[id]) {
       el.textContent = values[id];
       el.classList.remove("flip");
@@ -107,7 +116,7 @@ function updateClock() {
       el.classList.add("flip");
       last[id] = values[id];
     }
-  });
+  }
 }
 
 updateClock();
