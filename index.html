@@ -4,50 +4,71 @@
 <meta charset="UTF-8">
 <title>Pink Flip Clock</title>
 <style>
-  html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #050005;
-  }
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050005;
+}
 
-  body {
-    background-image: url("background.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+body {
+  background-image: url("background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-  .clock {
-    position: absolute;
-    left: 33.7%;
-    top: 60.5%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 2.1vw;
-    font-family: Georgia, serif;
-    color: #ffd2ea;
-    text-shadow: 0 0 12px #ff3fa8, 0 0 25px #ff3fa8;
-    font-weight: bold;
-  }
+.clock {
+  position: absolute;
+  left: 35%;
+  top: 58.5%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2.3vw;
+  font-family: Georgia, serif;
+  color: #ffd1ea;
+  text-shadow: 0 0 14px #ff38a8, 0 0 30px #ff38a8;
+  font-weight: bold;
+  animation: breathe 3.5s ease-in-out infinite;
+}
 
-  .num {
-    width: 9vw;
-    text-align: center;
-    font-size: 5.8vw;
-  }
+.num {
+  min-width: 9vw;
+  text-align: center;
+  font-size: 7.1vw;
+  line-height: 1;
+}
 
-  .colon {
-    font-size: 5vw;
-    margin-top: -0.5vw;
-  }
+.colon {
+  font-size: 6.1vw;
+  line-height: 1;
+  color: #ff8ac9;
+  text-shadow: 0 0 18px #ff38a8, 0 0 35px #ff38a8;
+  margin-top: -0.4vw;
+}
 
-  .ampm {
-    font-size: 2.7vw;
-    margin-left: -0.5vw;
-  }
+.ampm {
+  font-size: 3vw;
+  margin-left: -1vw;
+  margin-top: -1.8vw;
+}
+
+.flip {
+  animation: flip .45s ease;
+}
+
+@keyframes flip {
+  0% { transform: rotateX(0deg); opacity: 1; }
+  50% { transform: rotateX(90deg); opacity: .55; }
+  100% { transform: rotateX(0deg); opacity: 1; }
+}
+
+@keyframes breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.18); }
+}
 </style>
 </head>
 
@@ -62,16 +83,31 @@
   </div>
 
 <script>
+let last = {};
+
 function updateClock() {
   const now = new Date();
   let h = now.getHours();
   const ampm = h >= 12 ? "PM" : "AM";
   h = h % 12 || 12;
 
-  document.getElementById("h").textContent = String(h).padStart(2, "0");
-  document.getElementById("m").textContent = String(now.getMinutes()).padStart(2, "0");
-  document.getElementById("s").textContent = String(now.getSeconds()).padStart(2, "0");
-  document.getElementById("ampm").textContent = ampm;
+  const values = {
+    h: String(h).padStart(2, "0"),
+    m: String(now.getMinutes()).padStart(2, "0"),
+    s: String(now.getSeconds()).padStart(2, "0"),
+    ampm
+  };
+
+  Object.keys(values).forEach(id => {
+    const el = document.getElementById(id);
+    if (last[id] !== values[id]) {
+      el.textContent = values[id];
+      el.classList.remove("flip");
+      void el.offsetWidth;
+      el.classList.add("flip");
+      last[id] = values[id];
+    }
+  });
 }
 
 updateClock();
