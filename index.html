@@ -1,182 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Pink Flip Clock</title>
-  <style>
-    body {
-      margin: 0;
-      background: #120008;
-      font-family: Georgia, serif;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<title>Pink Flip Clock</title>
+<style>
+  html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050005;
+  }
 
-    .scene {
-      width: 100%;
-      height: 100vh;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(255, 79, 170, .35), transparent 25%),
-        radial-gradient(circle at 85% 15%, rgba(255, 70, 130, .25), transparent 30%),
-        linear-gradient(135deg, #140008, #250011 55%, #090005);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+  body {
+    background-image: url("background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-    .rose-left, .rose-right {
-      position: absolute;
-      font-size: 95px;
-      opacity: .9;
-      filter: drop-shadow(0 0 18px #ff4fa3);
-    }
+  .clock {
+    position: absolute;
+    left: 33.7%;
+    top: 60.5%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 2.1vw;
+    font-family: Georgia, serif;
+    color: #ffd2ea;
+    text-shadow: 0 0 12px #ff3fa8, 0 0 25px #ff3fa8;
+    font-weight: bold;
+  }
 
-    .rose-left {
-      top: 20px;
-      left: 25px;
-    }
+  .num {
+    width: 9vw;
+    text-align: center;
+    font-size: 5.8vw;
+  }
 
-    .rose-right {
-      bottom: 25px;
-      right: 35px;
-      font-size: 80px;
-    }
+  .colon {
+    font-size: 5vw;
+    margin-top: -0.5vw;
+  }
 
-    .city {
-      position: absolute;
-      right: 40px;
-      top: 40px;
-      font-size: 80px;
-      opacity: .35;
-      filter: drop-shadow(0 0 20px #ff4fa3);
-    }
-
-    .frame {
-      position: absolute;
-      left: 210px;
-      top: 45px;
-      width: 115px;
-      height: 135px;
-      border: 3px solid rgba(255, 136, 190, .6);
-      box-shadow: 0 0 20px rgba(255, 54, 160, .5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffb6d9;
-      font-size: 45px;
-      opacity: .6;
-    }
-
-    .clock-box {
-      width: 82%;
-      max-width: 950px;
-      min-height: 230px;
-      border-radius: 38px;
-      background: rgba(10, 0, 8, .78);
-      border: 2px solid #ff4fa3;
-      box-shadow:
-        0 0 18px #ff4fa3,
-        inset 0 0 35px rgba(255, 68, 160, .28),
-        0 0 70px rgba(255, 33, 140, .45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 22px;
-      position: relative;
-      padding: 30px;
-    }
-
-    .card, .ampm {
-      background: linear-gradient(#2a0717, #070006);
-      border: 1px solid rgba(255, 111, 184, .8);
-      border-radius: 16px;
-      box-shadow:
-        inset 0 -20px 30px rgba(0,0,0,.6),
-        0 0 18px rgba(255, 69, 160, .55);
-      color: #ffd3e8;
-      text-shadow: 0 0 14px #ff4fa3, 0 0 28px #ff4fa3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .card {
-      width: 155px;
-      height: 135px;
-      font-size: 82px;
-      font-weight: bold;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
-      border-top: 2px solid rgba(0,0,0,.65);
-    }
-
-    .colon {
-      font-size: 75px;
-      color: #ff77bc;
-      text-shadow: 0 0 18px #ff4fa3;
-      margin-top: -10px;
-    }
-
-    .ampm {
-      width: 95px;
-      height: 135px;
-      font-size: 34px;
-      font-weight: bold;
-    }
-
-    .sparkle {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(#ff8ac6 1px, transparent 1px),
-        radial-gradient(#ffd1e8 1px, transparent 1px);
-      background-size: 80px 80px, 130px 130px;
-      opacity: .12;
-      pointer-events: none;
-    }
-  </style>
+  .ampm {
+    font-size: 2.7vw;
+    margin-left: -0.5vw;
+  }
+</style>
 </head>
+
 <body>
-  <div class="scene">
-    <div class="sparkle"></div>
-
-    <div class="rose-left">🌹🌹</div>
-    <div class="rose-right">🌹🌹</div>
-    <div class="city">🌃</div>
-    <div class="frame">🌆</div>
-
-    <div class="clock-box">
-      <div class="card" id="hours">00</div>
-      <div class="colon">:</div>
-      <div class="card" id="minutes">00</div>
-      <div class="colon">:</div>
-      <div class="card" id="seconds">00</div>
-      <div class="ampm" id="ampm">AM</div>
-    </div>
+  <div class="clock">
+    <div class="num" id="h">00</div>
+    <div class="colon">:</div>
+    <div class="num" id="m">00</div>
+    <div class="colon">:</div>
+    <div class="num" id="s">00</div>
+    <div class="ampm" id="ampm">PM</div>
   </div>
 
-  <script>
-    function updateClock() {
-      const now = new Date();
-      let h = now.getHours();
-      const ampm = h >= 12 ? "PM" : "AM";
-      h = h % 12 || 12;
+<script>
+function updateClock() {
+  const now = new Date();
+  let h = now.getHours();
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
 
-      document.getElementById("hours").textContent = String(h).padStart(2, "0");
-      document.getElementById("minutes").textContent = String(now.getMinutes()).padStart(2, "0");
-      document.getElementById("seconds").textContent = String(now.getSeconds()).padStart(2, "0");
-      document.getElementById("ampm").textContent = ampm;
-    }
+  document.getElementById("h").textContent = String(h).padStart(2, "0");
+  document.getElementById("m").textContent = String(now.getMinutes()).padStart(2, "0");
+  document.getElementById("s").textContent = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("ampm").textContent = ampm;
+}
 
-    updateClock();
-    setInterval(updateClock, 1000);
-  </script>
+updateClock();
+setInterval(updateClock, 1000);
+</script>
 </body>
 </html>
