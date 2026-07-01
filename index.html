@@ -2,137 +2,105 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Life HQ Flip Clock</title>
-
+  <title>Life HQ Clock</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      width: 100%;
       height: 100vh;
+      width: 100%;
       overflow: hidden;
-      font-family: "Poppins", sans-serif;
       background: #020002;
-      color: #ffd6ea;
+      font-family: "Poppins", sans-serif;
+      color: #ffd7ea;
     }
 
     .widget {
-      width: 100%;
       height: 100vh;
+      width: 100%;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255, 72, 165, .75);
-      background:
-        radial-gradient(circle at 15% 55%, rgba(255, 35, 130, .18), transparent 28%),
-        radial-gradient(circle at 85% 45%, rgba(255, 50, 150, .20), transparent 30%),
-        radial-gradient(circle at center, rgba(255, 90, 180, .08), transparent 55%),
-        linear-gradient(135deg, #030003 0%, #0b0208 45%, #030003 100%);
-      box-shadow:
-        inset 0 0 80px rgba(255, 45, 145, .22),
-        0 0 35px rgba(255, 45, 145, .35);
       display: flex;
       align-items: center;
       justify-content: center;
+      background:
+        radial-gradient(circle at 18% 55%, rgba(255, 55, 150, .20), transparent 24%),
+        radial-gradient(circle at 82% 55%, rgba(255, 60, 160, .18), transparent 24%),
+        radial-gradient(circle at center, rgba(255, 80, 170, .10), transparent 55%),
+        linear-gradient(135deg, #030003 0%, #090106 50%, #030003 100%);
+      border: 1px solid rgba(255, 91, 176, .75);
+      box-shadow:
+        inset 0 0 90px rgba(255, 60, 160, .22),
+        0 0 35px rgba(255, 60, 160, .25);
     }
 
-    .sparkles {
+    .widget::before {
+      content: "";
       position: absolute;
       inset: 0;
       background-image:
-        radial-gradient(circle, rgba(255, 185, 220, .9) 1px, transparent 1.8px),
-        radial-gradient(circle, rgba(255, 70, 165, .5) 1px, transparent 2px);
-      background-size: 90px 90px, 140px 140px;
+        radial-gradient(circle, rgba(255, 190, 225, .85) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255, 65, 160, .45) 1px, transparent 2px);
+      background-size: 95px 95px, 145px 145px;
       opacity: .18;
-      animation: twinkle 5s ease-in-out infinite alternate;
+      animation: sparkle 5s ease-in-out infinite alternate;
     }
 
-    .rose-left, .rose-right, .candle-left, .candle-right {
-      position: absolute;
-      pointer-events: none;
-      filter: drop-shadow(0 0 20px rgba(255, 59, 150, .8));
-      opacity: .9;
-    }
-
-    .rose-left {
-      left: 28px;
-      bottom: 18px;
-      font-size: 88px;
-    }
-
-    .rose-right {
-      right: 36px;
-      bottom: 42px;
-      font-size: 100px;
-    }
-
-    .candle-left {
-      left: 55px;
-      top: 42px;
-      font-size: 92px;
-      opacity: .75;
-    }
-
-    .candle-right {
-      right: 52px;
-      top: 58px;
-      font-size: 72px;
-      opacity: .65;
-    }
-
-    .content {
+    .panel {
       width: 94%;
-      height: 86%;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 80, 170, .75);
+      height: 88%;
+      border-radius: 22px;
+      position: relative;
+      z-index: 2;
+      border: 1.5px solid rgba(255, 91, 176, .8);
       background:
-        linear-gradient(rgba(0, 0, 0, .30), rgba(0, 0, 0, .55)),
-        radial-gradient(circle at center, rgba(255, 50, 145, .10), transparent 60%);
+        linear-gradient(rgba(0, 0, 0, .18), rgba(0, 0, 0, .56)),
+        radial-gradient(circle at 18% 55%, rgba(255, 70, 155, .18), transparent 28%),
+        radial-gradient(circle at 82% 55%, rgba(255, 70, 155, .18), transparent 28%);
       box-shadow:
-        0 0 28px rgba(255, 60, 160, .42),
-        inset 0 0 55px rgba(255, 80, 170, .12);
+        0 0 28px rgba(255, 72, 165, .42),
+        inset 0 0 60px rgba(255, 72, 165, .13);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 2;
-      position: relative;
+      flex-direction: column;
     }
 
     .title {
       font-family: "Playfair Display", serif;
-      font-size: 42px;
-      font-weight: 800;
+      font-size: 44px;
       letter-spacing: 5px;
       color: #ffc0dc;
       text-shadow:
-        0 0 12px rgba(255, 87, 175, .95),
-        0 0 30px rgba(255, 40, 145, .85);
+        0 0 12px rgba(255, 110, 190, .95),
+        0 0 28px rgba(255, 45, 150, .85);
       margin-bottom: 22px;
     }
 
     .clock {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 18px;
     }
 
     .flip {
-      width: 170px;
-      height: 125px;
-      border-radius: 18px;
+      width: 175px;
+      height: 130px;
+      border-radius: 19px;
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(255, 120, 190, .16), rgba(0, 0, 0, .08)),
-        linear-gradient(135deg, #080106, #1a0714 48%, #030003);
-      border: 2px solid rgba(255, 90, 175, .95);
+        linear-gradient(180deg, rgba(255,255,255,.10), transparent 38%),
+        linear-gradient(135deg, #070105, #1b0714 50%, #040003);
+      border: 2px solid rgba(255, 95, 178, .95);
       box-shadow:
-        0 0 20px rgba(255, 62, 160, .95),
-        0 0 46px rgba(255, 40, 145, .42),
-        inset 0 0 20px rgba(255, 120, 190, .16),
-        0 14px 30px rgba(0,0,0,.75);
+        0 0 18px rgba(255, 70, 165, .95),
+        0 0 42px rgba(255, 45, 150, .45),
+        inset 0 0 24px rgba(255, 135, 200, .16),
+        0 16px 35px rgba(0,0,0,.75);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -141,38 +109,27 @@
     .flip::before {
       content: "";
       position: absolute;
-      left: 0;
       top: 50%;
       width: 100%;
       height: 2px;
-      background: rgba(0,0,0,.85);
-      z-index: 4;
-    }
-
-    .flip::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 45%;
-      background: linear-gradient(rgba(255,255,255,.10), transparent);
-      z-index: 2;
+      background: rgba(0,0,0,.9);
+      z-index: 5;
     }
 
     .num {
-      z-index: 5;
-      font-size: 86px;
+      font-size: 90px;
       font-weight: 800;
       color: #ff7fbd;
       line-height: 1;
       text-shadow:
-        0 0 10px rgba(255, 180, 220, 1),
-        0 0 25px rgba(255, 38, 145, 1),
-        0 0 45px rgba(255, 38, 145, .55);
+        0 0 10px rgba(255, 200, 230, 1),
+        0 0 25px rgba(255, 45, 155, 1),
+        0 0 45px rgba(255, 45, 155, .60);
+      z-index: 6;
     }
 
     .colon {
-      font-size: 70px;
+      font-size: 72px;
       font-weight: 800;
       color: #ff78b9;
       text-shadow: 0 0 18px rgba(255, 55, 160, 1);
@@ -180,13 +137,15 @@
 
     .ampm {
       width: 92px;
-      height: 105px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #070105, #160611);
-      border: 2px solid rgba(255, 90, 175, .95);
+      height: 108px;
+      border-radius: 17px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), transparent 42%),
+        linear-gradient(135deg, #070105, #170611);
+      border: 2px solid rgba(255, 95, 178, .95);
       box-shadow:
-        0 0 20px rgba(255, 62, 160, .85),
-        inset 0 0 18px rgba(255, 120, 190, .12);
+        0 0 18px rgba(255, 70, 165, .85),
+        inset 0 0 18px rgba(255, 135, 200, .12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -198,65 +157,76 @@
     .date {
       margin-top: 20px;
       font-family: "Playfair Display", serif;
-      font-size: 26px;
+      font-size: 27px;
       font-style: italic;
       color: #ffc4dc;
       text-shadow: 0 0 14px rgba(255, 70, 165, .75);
     }
 
     .divider {
-      margin: 7px 0 6px;
+      margin: 8px 0 5px;
       color: #ff7fbd;
-      letter-spacing: 12px;
+      letter-spacing: 10px;
       font-size: 18px;
     }
 
     .quote {
       font-family: "Playfair Display", serif;
-      font-size: 20px;
+      font-size: 21px;
       font-style: italic;
       color: #ffe2ef;
       text-shadow: 0 0 12px rgba(255, 70, 165, .55);
     }
 
-    .flip-animate {
-      animation: flip .42s ease;
+    .rose, .candle {
+      position: absolute;
+      z-index: 3;
+      opacity: .9;
+      filter: drop-shadow(0 0 18px rgba(255, 55, 155, .9));
+      pointer-events: none;
     }
+
+    .rose.one { left: 42px; bottom: 28px; font-size: 85px; }
+    .rose.two { right: 48px; bottom: 35px; font-size: 96px; }
+    .candle.one { left: 55px; top: 42px; font-size: 76px; opacity: .7; }
+    .candle.two { right: 60px; top: 52px; font-size: 66px; opacity: .6; }
+
+    .flip-animate { animation: flip .42s ease; }
 
     @keyframes flip {
       0% { transform: rotateX(0deg); }
-      50% { transform: rotateX(-22deg) scale(.98); }
+      50% { transform: rotateX(-20deg) scale(.98); }
       100% { transform: rotateX(0deg); }
     }
 
-    @keyframes twinkle {
+    @keyframes sparkle {
       from { opacity: .10; }
       to { opacity: .24; }
     }
 
     @media (max-width: 900px) {
-      .title { font-size: 30px; }
-      .flip { width: 112px; height: 90px; }
+      .panel { height: 88%; width: 94%; }
+      .title { font-size: 30px; margin-bottom: 15px; }
+      .clock { gap: 10px; }
+      .flip { width: 112px; height: 88px; }
       .num { font-size: 58px; }
-      .colon { font-size: 48px; }
-      .ampm { width: 62px; height: 78px; font-size: 22px; }
+      .colon { font-size: 45px; }
+      .ampm { width: 62px; height: 75px; font-size: 22px; }
       .date { font-size: 20px; }
-      .quote { font-size: 16px; }
-      .rose-left, .rose-right, .candle-left, .candle-right { font-size: 48px; }
+      .quote { font-size: 15px; }
+      .rose.one, .rose.two, .candle.one, .candle.two { font-size: 44px; }
     }
   </style>
 </head>
 
 <body>
   <div class="widget">
-    <div class="sparkles"></div>
+    <div class="panel">
+      <div class="candle one">🕯️</div>
+      <div class="candle two">🕯️</div>
+      <div class="rose one">🌹</div>
+      <div class="rose two">🌹</div>
 
-    <div class="candle-left">🕯️</div>
-    <div class="candle-right">🕯️</div>
-    <div class="rose-left">🌹</div>
-    <div class="rose-right">🌹</div>
-
-    <div class="content">
       <div class="title">♡ LIFE HQ ♡</div>
 
       <div class="clock">
