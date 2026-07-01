@@ -1,362 +1,182 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title>Life HQ Final Clock</title>
+  <meta charset="UTF-8" />
+  <title>Pink Flip Clock</title>
+  <style>
+    body {
+      margin: 0;
+      background: #120008;
+      font-family: Georgia, serif;
+      overflow: hidden;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    .scene {
+      width: 100%;
+      height: 100vh;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 79, 170, .35), transparent 25%),
+        radial-gradient(circle at 85% 15%, rgba(255, 70, 130, .25), transparent 30%),
+        linear-gradient(135deg, #140008, #250011 55%, #090005);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+    .rose-left, .rose-right {
+      position: absolute;
+      font-size: 95px;
+      opacity: .9;
+      filter: drop-shadow(0 0 18px #ff4fa3);
+    }
 
-body{
-  width:100%;
-  height:100vh;
-  overflow:hidden;
-  background:#010001;
-  font-family:Poppins,sans-serif;
-  color:#ffd9eb;
-}
+    .rose-left {
+      top: 20px;
+      left: 25px;
+    }
 
-.widget{
-  width:100%;
-  height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 18% 45%,rgba(255,35,135,.22),transparent 22%),
-    radial-gradient(circle at 84% 48%,rgba(255,30,130,.20),transparent 22%),
-    radial-gradient(circle at center,rgba(255,70,165,.08),transparent 55%),
-    linear-gradient(135deg,#010001,#070104 50%,#010001);
-  border:1px solid rgba(255,70,165,.9);
-  box-shadow:inset 0 0 90px rgba(255,40,145,.25);
-}
+    .rose-right {
+      bottom: 25px;
+      right: 35px;
+      font-size: 80px;
+    }
 
-.stars{
-  position:absolute;
-  inset:0;
-  background-image:
-    radial-gradient(circle,rgba(255,220,240,.95) 1px,transparent 2px),
-    radial-gradient(circle,rgba(255,70,165,.7) 1px,transparent 2px);
-  background-size:75px 75px,130px 130px;
-  opacity:.25;
-  animation:twinkle 4s infinite alternate ease-in-out;
-}
+    .city {
+      position: absolute;
+      right: 40px;
+      top: 40px;
+      font-size: 80px;
+      opacity: .35;
+      filter: drop-shadow(0 0 20px #ff4fa3);
+    }
 
-.card{
-  width:94%;
-  height:88%;
-  position:relative;
-  border-radius:28px;
-  border:2px solid rgba(255,70,165,.95);
-  background:
-    linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.72)),
-    radial-gradient(circle at 14% 58%,rgba(255,55,150,.18),transparent 26%),
-    radial-gradient(circle at 86% 58%,rgba(255,55,150,.18),transparent 26%);
-  box-shadow:
-    0 0 36px rgba(255,50,155,.55),
-    inset 0 0 80px rgba(255,80,170,.16);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  z-index:2;
-}
+    .frame {
+      position: absolute;
+      left: 210px;
+      top: 45px;
+      width: 115px;
+      height: 135px;
+      border: 3px solid rgba(255, 136, 190, .6);
+      box-shadow: 0 0 20px rgba(255, 54, 160, .5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffb6d9;
+      font-size: 45px;
+      opacity: .6;
+    }
 
-.card:before{
-  content:"";
-  position:absolute;
-  inset:16px;
-  border-radius:22px;
-  border:1px solid rgba(255,170,220,.18);
-  box-shadow:inset 0 0 25px rgba(255,60,160,.18);
-}
+    .clock-box {
+      width: 82%;
+      max-width: 950px;
+      min-height: 230px;
+      border-radius: 38px;
+      background: rgba(10, 0, 8, .78);
+      border: 2px solid #ff4fa3;
+      box-shadow:
+        0 0 18px #ff4fa3,
+        inset 0 0 35px rgba(255, 68, 160, .28),
+        0 0 70px rgba(255, 33, 140, .45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      position: relative;
+      padding: 30px;
+    }
 
-.candle{
-  position:absolute;
-  width:72px;
-  height:110px;
-  border-radius:38px 38px 14px 14px;
-  background:linear-gradient(#ff79bd,#420017 70%,#090005);
-  box-shadow:0 0 35px rgba(255,70,165,.8);
-  opacity:.65;
-}
+    .card, .ampm {
+      background: linear-gradient(#2a0717, #070006);
+      border: 1px solid rgba(255, 111, 184, .8);
+      border-radius: 16px;
+      box-shadow:
+        inset 0 -20px 30px rgba(0,0,0,.6),
+        0 0 18px rgba(255, 69, 160, .55);
+      color: #ffd3e8;
+      text-shadow: 0 0 14px #ff4fa3, 0 0 28px #ff4fa3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 
-.candle:before{
-  content:"";
-  position:absolute;
-  top:-42px;
-  left:22px;
-  width:28px;
-  height:50px;
-  border-radius:50%;
-  background:radial-gradient(circle,#fff7d8,#ff8ac8 35%,#ff1690 70%,transparent 75%);
-  filter:drop-shadow(0 0 18px #ff4faf);
-  animation:flicker 1.2s infinite alternate;
-}
+    .card {
+      width: 155px;
+      height: 135px;
+      font-size: 82px;
+      font-weight: bold;
+    }
 
-.candle.left{left:48px;bottom:38px}
-.candle.right{right:55px;bottom:42px;transform:scale(.78)}
+    .card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      border-top: 2px solid rgba(0,0,0,.65);
+    }
 
-.rose{
-  position:absolute;
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 35% 35%,#ff7fbd 0 12%,transparent 14%),
-    radial-gradient(circle at 65% 35%,#ff4ea3 0 16%,transparent 18%),
-    radial-gradient(circle at 45% 65%,#c40063 0 22%,transparent 24%),
-    radial-gradient(circle,#ff2b91,#51001f 60%,transparent 68%);
-  filter:blur(.3px) drop-shadow(0 0 25px rgba(255,45,145,.8));
-  opacity:.7;
-}
+    .colon {
+      font-size: 75px;
+      color: #ff77bc;
+      text-shadow: 0 0 18px #ff4fa3;
+      margin-top: -10px;
+    }
 
-.rose.left{left:105px;bottom:34px;transform:scale(.85)}
-.rose.right{right:115px;bottom:28px}
+    .ampm {
+      width: 95px;
+      height: 135px;
+      font-size: 34px;
+      font-weight: bold;
+    }
 
-.title{
-  font-family:"Playfair Display",serif;
-  font-size:54px;
-  letter-spacing:7px;
-  font-weight:800;
-  margin-bottom:26px;
-  color:#ffc4df;
-  text-shadow:
-    0 0 10px rgba(255,230,245,1),
-    0 0 28px rgba(255,55,160,1),
-    0 0 60px rgba(255,35,145,.75);
-  z-index:5;
-}
-
-.clock{
-  display:flex;
-  align-items:center;
-  gap:24px;
-  z-index:5;
-}
-
-.box{
-  width:205px;
-  height:145px;
-  border-radius:22px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.16),transparent 42%),
-    linear-gradient(135deg,#060104,#1b0613 55%,#030002);
-  border:2px solid rgba(255,95,180,1);
-  box-shadow:
-    0 0 22px rgba(255,70,165,1),
-    0 0 56px rgba(255,35,145,.58),
-    inset 0 0 28px rgba(255,145,205,.18),
-    0 22px 45px rgba(0,0,0,.85);
-}
-
-.box:before{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:0;
-  width:100%;
-  height:2px;
-  background:rgba(0,0,0,.92);
-  box-shadow:0 0 8px rgba(255,180,220,.6);
-  z-index:3;
-}
-
-.box:after{
-  content:"";
-  position:absolute;
-  inset:9px;
-  border-radius:15px;
-  border:1px solid rgba(255,175,220,.16);
-}
-
-.number{
-  font-size:106px;
-  font-weight:800;
-  line-height:1;
-  color:#ff7fbd;
-  z-index:4;
-  text-shadow:
-    0 0 10px rgba(255,230,245,1),
-    0 0 28px rgba(255,50,155,1),
-    0 0 65px rgba(255,45,150,.8);
-}
-
-.colon{
-  font-size:86px;
-  font-weight:800;
-  color:#ff78b9;
-  text-shadow:
-    0 0 12px rgba(255,230,245,1),
-    0 0 30px rgba(255,50,155,1);
-  margin-top:-8px;
-}
-
-.ampm{
-  width:105px;
-  height:118px;
-  border-radius:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:34px;
-  font-weight:800;
-  color:#ffb5d5;
-  background:linear-gradient(135deg,#060104,#170510);
-  border:2px solid rgba(255,95,180,.98);
-  box-shadow:
-    0 0 22px rgba(255,70,165,.95),
-    inset 0 0 20px rgba(255,140,205,.15);
-  z-index:5;
-}
-
-.date{
-  margin-top:24px;
-  font-family:"Playfair Display",serif;
-  font-size:34px;
-  font-style:italic;
-  color:#ffc8df;
-  text-shadow:0 0 16px rgba(255,70,165,.9);
-  z-index:5;
-}
-
-.divider{
-  margin:8px 0 6px;
-  color:#ff83c1;
-  letter-spacing:14px;
-  font-size:20px;
-  z-index:5;
-}
-
-.quote{
-  font-family:"Playfair Display",serif;
-  font-size:25px;
-  font-style:italic;
-  color:#ffe4f0;
-  text-shadow:0 0 14px rgba(255,70,165,.7);
-  z-index:5;
-}
-
-.flip{animation:flip .4s ease}
-
-@keyframes flip{
-  0%{transform:rotateX(0)}
-  50%{transform:rotateX(-20deg) scale(.98)}
-  100%{transform:rotateX(0)}
-}
-
-@keyframes twinkle{
-  from{opacity:.14}
-  to{opacity:.32}
-}
-
-@keyframes flicker{
-  from{transform:scale(.9) rotate(-2deg);opacity:.55}
-  to{transform:scale(1.08) rotate(2deg);opacity:1}
-}
-
-@media(max-width:900px){
-  .title{font-size:32px;margin-bottom:16px}
-  .clock{gap:10px}
-  .box{width:116px;height:90px}
-  .number{font-size:60px}
-  .colon{font-size:46px}
-  .ampm{width:64px;height:76px;font-size:22px}
-  .date{font-size:20px}
-  .quote{font-size:15px}
-  .candle,.rose{display:none}
-}
-</style>
+    .sparkle {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(#ff8ac6 1px, transparent 1px),
+        radial-gradient(#ffd1e8 1px, transparent 1px);
+      background-size: 80px 80px, 130px 130px;
+      opacity: .12;
+      pointer-events: none;
+    }
+  </style>
 </head>
-
 <body>
-<div class="widget">
-  <div class="stars"></div>
+  <div class="scene">
+    <div class="sparkle"></div>
 
-  <div class="card">
-    <div class="candle left"></div>
-    <div class="candle right"></div>
-    <div class="rose left"></div>
-    <div class="rose right"></div>
+    <div class="rose-left">🌹🌹</div>
+    <div class="rose-right">🌹🌹</div>
+    <div class="city">🌃</div>
+    <div class="frame">🌆</div>
 
-    <div class="title">♡ LIFE HQ ♡</div>
-
-    <div class="clock">
-      <div class="box" id="hBox"><span class="number" id="hours">00</span></div>
+    <div class="clock-box">
+      <div class="card" id="hours">00</div>
       <div class="colon">:</div>
-      <div class="box" id="mBox"><span class="number" id="minutes">00</span></div>
+      <div class="card" id="minutes">00</div>
       <div class="colon">:</div>
-      <div class="box" id="sBox"><span class="number" id="seconds">00</span></div>
-      <div class="ampm" id="ampm">PM</div>
+      <div class="card" id="seconds">00</div>
+      <div class="ampm" id="ampm">AM</div>
     </div>
-
-    <div class="date" id="date"></div>
-    <div class="divider">♡ ─ ♡ ─ ♡</div>
-    <div class="quote">discipline today, freedom tomorrow ✨</div>
   </div>
-</div>
 
-<script>
-let last={h:"",m:"",s:""};
+  <script>
+    function updateClock() {
+      const now = new Date();
+      let h = now.getHours();
+      const ampm = h >= 12 ? "PM" : "AM";
+      h = h % 12 || 12;
 
-function animate(id){
-  const el=document.getElementById(id);
-  el.classList.remove("flip");
-  void el.offsetWidth;
-  el.classList.add("flip");
-}
+      document.getElementById("hours").textContent = String(h).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(now.getMinutes()).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(now.getSeconds()).padStart(2, "0");
+      document.getElementById("ampm").textContent = ampm;
+    }
 
-function updateClock(){
-  const now=new Date();
-  let h=now.getHours();
-  const ampm=h>=12?"PM":"AM";
-  h=h%12||12;
-
-  const hour=String(h).padStart(2,"0");
-  const min=String(now.getMinutes()).padStart(2,"0");
-  const sec=String(now.getSeconds()).padStart(2,"0");
-
-  if(hour!==last.h){
-    document.getElementById("hours").textContent=hour;
-    animate("hBox");
-    last.h=hour;
-  }
-
-  if(min!==last.m){
-    document.getElementById("minutes").textContent=min;
-    animate("mBox");
-    last.m=min;
-  }
-
-  if(sec!==last.s){
-    document.getElementById("seconds").textContent=sec;
-    animate("sBox");
-    last.s=sec;
-  }
-
-  document.getElementById("ampm").textContent=ampm;
-
-  document.getElementById("date").textContent=
-    now.toLocaleDateString("en-US",{
-      weekday:"long",
-      month:"long",
-      day:"numeric",
-      year:"numeric"
-    });
-}
-
-updateClock();
-setInterval(updateClock,1000);
-</script>
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
 </body>
 </html>
