@@ -1,371 +1,362 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Life HQ Clock Widget</title>
+<meta charset="UTF-8" />
+<title>Life HQ Final Clock</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    body {
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: #020002;
-      font-family: "Poppins", sans-serif;
-      color: #ffd7ea;
-    }
+body{
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background:#010001;
+  font-family:Poppins,sans-serif;
+  color:#ffd9eb;
+}
 
-    .widget {
-      width: 100%;
-      height: 100vh;
-      background:
-        radial-gradient(circle at 18% 50%, rgba(255, 35, 140, .28), transparent 24%),
-        radial-gradient(circle at 82% 50%, rgba(255, 35, 140, .22), transparent 24%),
-        radial-gradient(circle at 50% 50%, rgba(255, 70, 170, .13), transparent 48%),
-        linear-gradient(135deg, #020002 0%, #090106 48%, #020002 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 70, 170, .85);
-      box-shadow:
-        inset 0 0 90px rgba(255, 35, 140, .28),
-        0 0 38px rgba(255, 35, 140, .35);
-    }
+.widget{
+  width:100%;
+  height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 45%,rgba(255,35,135,.22),transparent 22%),
+    radial-gradient(circle at 84% 48%,rgba(255,30,130,.20),transparent 22%),
+    radial-gradient(circle at center,rgba(255,70,165,.08),transparent 55%),
+    linear-gradient(135deg,#010001,#070104 50%,#010001);
+  border:1px solid rgba(255,70,165,.9);
+  box-shadow:inset 0 0 90px rgba(255,40,145,.25);
+}
 
-    .stars {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255, 225, 240, .95) 1px, transparent 2px),
-        radial-gradient(circle, rgba(255, 72, 170, .75) 1px, transparent 2px);
-      background-size: 80px 80px, 130px 130px;
-      opacity: .25;
-      animation: twinkle 5s ease-in-out infinite alternate;
-    }
+.stars{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle,rgba(255,220,240,.95) 1px,transparent 2px),
+    radial-gradient(circle,rgba(255,70,165,.7) 1px,transparent 2px);
+  background-size:75px 75px,130px 130px;
+  opacity:.25;
+  animation:twinkle 4s infinite alternate ease-in-out;
+}
 
-    .card {
-      width: 92%;
-      height: 84%;
-      border-radius: 28px;
-      border: 1.5px solid rgba(255, 70, 170, .9);
-      background:
-        linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.62)),
-        radial-gradient(circle at 18% 55%, rgba(255, 45, 145, .24), transparent 30%),
-        radial-gradient(circle at 82% 55%, rgba(255, 45, 145, .22), transparent 30%);
-      box-shadow:
-        0 0 34px rgba(255, 55, 160, .48),
-        inset 0 0 75px rgba(255, 70, 170, .16);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 2;
-      overflow: hidden;
-    }
+.card{
+  width:94%;
+  height:88%;
+  position:relative;
+  border-radius:28px;
+  border:2px solid rgba(255,70,165,.95);
+  background:
+    linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.72)),
+    radial-gradient(circle at 14% 58%,rgba(255,55,150,.18),transparent 26%),
+    radial-gradient(circle at 86% 58%,rgba(255,55,150,.18),transparent 26%);
+  box-shadow:
+    0 0 36px rgba(255,50,155,.55),
+    inset 0 0 80px rgba(255,80,170,.16);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  z-index:2;
+}
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 14px;
-      border-radius: 22px;
-      border: 1px solid rgba(255, 160, 210, .14);
-      pointer-events: none;
-    }
+.card:before{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border-radius:22px;
+  border:1px solid rgba(255,170,220,.18);
+  box-shadow:inset 0 0 25px rgba(255,60,160,.18);
+}
 
-    .corner-left {
-      position: absolute;
-      left: 28px;
-      bottom: 24px;
-      width: 170px;
-      height: 170px;
-      background:
-        radial-gradient(circle at 40% 40%, rgba(255, 70, 150, .85), transparent 35%),
-        radial-gradient(circle at 65% 60%, rgba(160, 0, 70, .75), transparent 38%);
-      border-radius: 50%;
-      filter: blur(2px);
-      opacity: .45;
-    }
+.candle{
+  position:absolute;
+  width:72px;
+  height:110px;
+  border-radius:38px 38px 14px 14px;
+  background:linear-gradient(#ff79bd,#420017 70%,#090005);
+  box-shadow:0 0 35px rgba(255,70,165,.8);
+  opacity:.65;
+}
 
-    .corner-right {
-      position: absolute;
-      right: 28px;
-      bottom: 24px;
-      width: 190px;
-      height: 190px;
-      background:
-        radial-gradient(circle at 45% 45%, rgba(255, 70, 150, .9), transparent 35%),
-        radial-gradient(circle at 68% 62%, rgba(160, 0, 70, .78), transparent 40%);
-      border-radius: 50%;
-      filter: blur(2px);
-      opacity: .50;
-    }
+.candle:before{
+  content:"";
+  position:absolute;
+  top:-42px;
+  left:22px;
+  width:28px;
+  height:50px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff7d8,#ff8ac8 35%,#ff1690 70%,transparent 75%);
+  filter:drop-shadow(0 0 18px #ff4faf);
+  animation:flicker 1.2s infinite alternate;
+}
 
-    .flame {
-      position: absolute;
-      width: 46px;
-      height: 78px;
-      border-radius: 50% 50% 45% 45%;
-      background:
-        radial-gradient(circle at 50% 25%, #fff8dc, #ff8ac8 34%, #ff1f91 65%, transparent 72%);
-      filter: drop-shadow(0 0 22px #ff4faf);
-      opacity: .75;
-      animation: flicker 1.4s infinite alternate ease-in-out;
-    }
+.candle.left{left:48px;bottom:38px}
+.candle.right{right:55px;bottom:42px;transform:scale(.78)}
 
-    .flame.left { left: 72px; top: 54px; }
-    .flame.right { right: 82px; top: 62px; transform: scale(.75); opacity: .55; }
+.rose{
+  position:absolute;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 35%,#ff7fbd 0 12%,transparent 14%),
+    radial-gradient(circle at 65% 35%,#ff4ea3 0 16%,transparent 18%),
+    radial-gradient(circle at 45% 65%,#c40063 0 22%,transparent 24%),
+    radial-gradient(circle,#ff2b91,#51001f 60%,transparent 68%);
+  filter:blur(.3px) drop-shadow(0 0 25px rgba(255,45,145,.8));
+  opacity:.7;
+}
 
-    .title {
-      font-family: "Playfair Display", serif;
-      font-size: 44px;
-      letter-spacing: 6px;
-      color: #ffc4de;
-      text-shadow:
-        0 0 10px rgba(255, 210, 235, 1),
-        0 0 26px rgba(255, 55, 160, .95),
-        0 0 48px rgba(255, 35, 145, .65);
-      margin-bottom: 24px;
-      z-index: 5;
-    }
+.rose.left{left:105px;bottom:34px;transform:scale(.85)}
+.rose.right{right:115px;bottom:28px}
 
-    .clock {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      z-index: 5;
-    }
+.title{
+  font-family:"Playfair Display",serif;
+  font-size:54px;
+  letter-spacing:7px;
+  font-weight:800;
+  margin-bottom:26px;
+  color:#ffc4df;
+  text-shadow:
+    0 0 10px rgba(255,230,245,1),
+    0 0 28px rgba(255,55,160,1),
+    0 0 60px rgba(255,35,145,.75);
+  z-index:5;
+}
 
-    .box {
-      width: 178px;
-      height: 128px;
-      border-radius: 20px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.15), transparent 42%),
-        linear-gradient(135deg, #070105, #1a0613 55%, #040003);
-      border: 2px solid rgba(255, 90, 180, .98);
-      box-shadow:
-        0 0 20px rgba(255, 65, 165, .95),
-        0 0 48px rgba(255, 35, 145, .52),
-        inset 0 0 24px rgba(255, 145, 205, .18),
-        0 18px 38px rgba(0,0,0,.8);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+.clock{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  z-index:5;
+}
 
-    .box::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: rgba(0,0,0,.9);
-      box-shadow: 0 0 8px rgba(255,180,220,.5);
-      z-index: 3;
-    }
+.box{
+  width:205px;
+  height:145px;
+  border-radius:22px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.16),transparent 42%),
+    linear-gradient(135deg,#060104,#1b0613 55%,#030002);
+  border:2px solid rgba(255,95,180,1);
+  box-shadow:
+    0 0 22px rgba(255,70,165,1),
+    0 0 56px rgba(255,35,145,.58),
+    inset 0 0 28px rgba(255,145,205,.18),
+    0 22px 45px rgba(0,0,0,.85);
+}
 
-    .box::after {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(255, 170, 215, .14);
-      border-radius: 14px;
-    }
+.box:before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  width:100%;
+  height:2px;
+  background:rgba(0,0,0,.92);
+  box-shadow:0 0 8px rgba(255,180,220,.6);
+  z-index:3;
+}
 
-    .number {
-      font-size: 92px;
-      font-weight: 800;
-      color: #ff7fbd;
-      line-height: 1;
-      z-index: 4;
-      text-shadow:
-        0 0 10px rgba(255, 220, 240, 1),
-        0 0 26px rgba(255, 50, 155, 1),
-        0 0 55px rgba(255, 50, 155, .7);
-    }
+.box:after{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border-radius:15px;
+  border:1px solid rgba(255,175,220,.16);
+}
 
-    .colon {
-      font-size: 74px;
-      font-weight: 800;
-      color: #ff78b9;
-      text-shadow:
-        0 0 12px rgba(255, 210, 235, 1),
-        0 0 28px rgba(255, 50, 155, .95);
-      margin-top: -6px;
-    }
+.number{
+  font-size:106px;
+  font-weight:800;
+  line-height:1;
+  color:#ff7fbd;
+  z-index:4;
+  text-shadow:
+    0 0 10px rgba(255,230,245,1),
+    0 0 28px rgba(255,50,155,1),
+    0 0 65px rgba(255,45,150,.8);
+}
 
-    .ampm {
-      width: 96px;
-      height: 108px;
-      border-radius: 18px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), transparent 45%),
-        linear-gradient(135deg, #070105, #160510);
-      border: 2px solid rgba(255, 90, 180, .95);
-      box-shadow:
-        0 0 18px rgba(255, 70, 165, .9),
-        0 0 36px rgba(255, 40, 145, .42),
-        inset 0 0 18px rgba(255, 140, 205, .13);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffadd1;
-      font-size: 31px;
-      font-weight: 800;
-      z-index: 5;
-    }
+.colon{
+  font-size:86px;
+  font-weight:800;
+  color:#ff78b9;
+  text-shadow:
+    0 0 12px rgba(255,230,245,1),
+    0 0 30px rgba(255,50,155,1);
+  margin-top:-8px;
+}
 
-    .date {
-      margin-top: 24px;
-      font-family: "Playfair Display", serif;
-      font-size: 30px;
-      font-style: italic;
-      color: #ffc8df;
-      text-shadow: 0 0 14px rgba(255, 70, 165, .85);
-      z-index: 5;
-    }
+.ampm{
+  width:105px;
+  height:118px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  font-weight:800;
+  color:#ffb5d5;
+  background:linear-gradient(135deg,#060104,#170510);
+  border:2px solid rgba(255,95,180,.98);
+  box-shadow:
+    0 0 22px rgba(255,70,165,.95),
+    inset 0 0 20px rgba(255,140,205,.15);
+  z-index:5;
+}
 
-    .divider {
-      margin: 9px 0 6px;
-      color: #ff83c1;
-      letter-spacing: 13px;
-      font-size: 19px;
-      z-index: 5;
-    }
+.date{
+  margin-top:24px;
+  font-family:"Playfair Display",serif;
+  font-size:34px;
+  font-style:italic;
+  color:#ffc8df;
+  text-shadow:0 0 16px rgba(255,70,165,.9);
+  z-index:5;
+}
 
-    .quote {
-      font-family: "Playfair Display", serif;
-      font-size: 23px;
-      font-style: italic;
-      color: #ffe4f0;
-      text-shadow: 0 0 13px rgba(255, 70, 165, .65);
-      z-index: 5;
-    }
+.divider{
+  margin:8px 0 6px;
+  color:#ff83c1;
+  letter-spacing:14px;
+  font-size:20px;
+  z-index:5;
+}
 
-    .flip {
-      animation: flip .4s ease;
-    }
+.quote{
+  font-family:"Playfair Display",serif;
+  font-size:25px;
+  font-style:italic;
+  color:#ffe4f0;
+  text-shadow:0 0 14px rgba(255,70,165,.7);
+  z-index:5;
+}
 
-    @keyframes flip {
-      0% { transform: rotateX(0deg); }
-      50% { transform: rotateX(-20deg) scale(.98); }
-      100% { transform: rotateX(0deg); }
-    }
+.flip{animation:flip .4s ease}
 
-    @keyframes twinkle {
-      from { opacity: .13; }
-      to { opacity: .30; }
-    }
+@keyframes flip{
+  0%{transform:rotateX(0)}
+  50%{transform:rotateX(-20deg) scale(.98)}
+  100%{transform:rotateX(0)}
+}
 
-    @keyframes flicker {
-      from { transform: scale(.94) rotate(-2deg); opacity: .55; }
-      to { transform: scale(1.05) rotate(2deg); opacity: .9; }
-    }
+@keyframes twinkle{
+  from{opacity:.14}
+  to{opacity:.32}
+}
 
-    @media (max-width: 900px) {
-      .card { width: 94%; height: 86%; }
-      .title { font-size: 30px; margin-bottom: 16px; }
-      .clock { gap: 10px; }
-      .box { width: 112px; height: 88px; border-radius: 14px; }
-      .number { font-size: 58px; }
-      .colon { font-size: 46px; }
-      .ampm { width: 62px; height: 75px; font-size: 22px; }
-      .date { font-size: 20px; }
-      .quote { font-size: 15px; }
-      .corner-left, .corner-right { width: 80px; height: 80px; }
-      .flame { display: none; }
-    }
-  </style>
+@keyframes flicker{
+  from{transform:scale(.9) rotate(-2deg);opacity:.55}
+  to{transform:scale(1.08) rotate(2deg);opacity:1}
+}
+
+@media(max-width:900px){
+  .title{font-size:32px;margin-bottom:16px}
+  .clock{gap:10px}
+  .box{width:116px;height:90px}
+  .number{font-size:60px}
+  .colon{font-size:46px}
+  .ampm{width:64px;height:76px;font-size:22px}
+  .date{font-size:20px}
+  .quote{font-size:15px}
+  .candle,.rose{display:none}
+}
+</style>
 </head>
 
 <body>
-  <div class="widget">
-    <div class="stars"></div>
+<div class="widget">
+  <div class="stars"></div>
 
-    <div class="card">
-      <div class="corner-left"></div>
-      <div class="corner-right"></div>
-      <div class="flame left"></div>
-      <div class="flame right"></div>
+  <div class="card">
+    <div class="candle left"></div>
+    <div class="candle right"></div>
+    <div class="rose left"></div>
+    <div class="rose right"></div>
 
-      <div class="title">♡ LIFE HQ ♡</div>
+    <div class="title">♡ LIFE HQ ♡</div>
 
-      <div class="clock">
-        <div class="box" id="hBox"><span class="number" id="hours">00</span></div>
-        <div class="colon">:</div>
-        <div class="box" id="mBox"><span class="number" id="minutes">00</span></div>
-        <div class="colon">:</div>
-        <div class="box" id="sBox"><span class="number" id="seconds">00</span></div>
-        <div class="ampm" id="ampm">AM</div>
-      </div>
-
-      <div class="date" id="date"></div>
-      <div class="divider">♡ ─ ♡ ─ ♡</div>
-      <div class="quote">discipline today, freedom tomorrow ✨</div>
+    <div class="clock">
+      <div class="box" id="hBox"><span class="number" id="hours">00</span></div>
+      <div class="colon">:</div>
+      <div class="box" id="mBox"><span class="number" id="minutes">00</span></div>
+      <div class="colon">:</div>
+      <div class="box" id="sBox"><span class="number" id="seconds">00</span></div>
+      <div class="ampm" id="ampm">PM</div>
     </div>
+
+    <div class="date" id="date"></div>
+    <div class="divider">♡ ─ ♡ ─ ♡</div>
+    <div class="quote">discipline today, freedom tomorrow ✨</div>
   </div>
+</div>
 
-  <script>
-    let last = { h: "", m: "", s: "" };
+<script>
+let last={h:"",m:"",s:""};
 
-    function animate(id) {
-      const el = document.getElementById(id);
-      el.classList.remove("flip");
-      void el.offsetWidth;
-      el.classList.add("flip");
-    }
+function animate(id){
+  const el=document.getElementById(id);
+  el.classList.remove("flip");
+  void el.offsetWidth;
+  el.classList.add("flip");
+}
 
-    function updateClock() {
-      const now = new Date();
+function updateClock(){
+  const now=new Date();
+  let h=now.getHours();
+  const ampm=h>=12?"PM":"AM";
+  h=h%12||12;
 
-      let h = now.getHours();
-      const ampm = h >= 12 ? "PM" : "AM";
-      h = h % 12 || 12;
+  const hour=String(h).padStart(2,"0");
+  const min=String(now.getMinutes()).padStart(2,"0");
+  const sec=String(now.getSeconds()).padStart(2,"0");
 
-      const hour = String(h).padStart(2, "0");
-      const min = String(now.getMinutes()).padStart(2, "0");
-      const sec = String(now.getSeconds()).padStart(2, "0");
+  if(hour!==last.h){
+    document.getElementById("hours").textContent=hour;
+    animate("hBox");
+    last.h=hour;
+  }
 
-      if (hour !== last.h) {
-        document.getElementById("hours").textContent = hour;
-        animate("hBox");
-        last.h = hour;
-      }
+  if(min!==last.m){
+    document.getElementById("minutes").textContent=min;
+    animate("mBox");
+    last.m=min;
+  }
 
-      if (min !== last.m) {
-        document.getElementById("minutes").textContent = min;
-        animate("mBox");
-        last.m = min;
-      }
+  if(sec!==last.s){
+    document.getElementById("seconds").textContent=sec;
+    animate("sBox");
+    last.s=sec;
+  }
 
-      if (sec !== last.s) {
-        document.getElementById("seconds").textContent = sec;
-        animate("sBox");
-        last.s = sec;
-      }
+  document.getElementById("ampm").textContent=ampm;
 
-      document.getElementById("ampm").textContent = ampm;
+  document.getElementById("date").textContent=
+    now.toLocaleDateString("en-US",{
+      weekday:"long",
+      month:"long",
+      day:"numeric",
+      year:"numeric"
+    });
+}
 
-      document.getElementById("date").textContent =
-        now.toLocaleDateString("en-US", {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        });
-    }
-
-    updateClock();
-    setInterval(updateClock, 1000);
-  </script>
+updateClock();
+setInterval(updateClock,1000);
+</script>
 </body>
 </html>
