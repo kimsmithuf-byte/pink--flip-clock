@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Monthly Goals</title>
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #120006;
+  font-family: Georgia, serif;
+}
+
+body {
+  background-image: url("monthly-goals-background.png.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.content {
+  position: absolute;
+  left: 52%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 58%;
+  color: #fff1e6;
+  text-align: center;
+}
+
+.title {
+  color: #f4a6bd;
+  font-size: 44px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #f4a6bd;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+.goal-section {
+  text-align: left;
+  margin: 16px auto;
+  width: 82%;
+}
+
+.goal-section h2 {
+  color: #f4a6bd;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.goal {
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.progress-title {
+  color: #f4a6bd;
+  font-size: 22px;
+  margin-top: 26px;
+  margin-bottom: 12px;
+}
+
+.bar {
+  width: 82%;
+  height: 12px;
+  border: 1px solid #f4a6bd;
+  border-radius: 20px;
+  margin: 8px auto 16px;
+  overflow: hidden;
+}
+
+.fill {
+  width: 35%;
+  height: 100%;
+  background: #f4a6bd;
+  box-shadow: 0 0 15px #f4a6bd;
+}
+</style>
+</head>
+
+<body>
+<div class="content">
+  <div class="title">♡ JULY GOALS</div>
+  <div class="subtitle">DISCIPLINE • CONSISTENCY • GROWTH</div>
+
+  <div class="goal-section">
+    <h2>🌸 Health</h2>
+    <div class="goal">☐ Lose 5 pounds this month</div>
+    <div class="goal">☐ Exercise 5 days a week</div>
+  </div>
+
+  <div class="goal-section">
+    <h2>📚 LSAT</h2>
+    <div class="goal">☐ Study 10 hours a week</div>
+  </div>
+
+  <div class="goal-section">
+    <h2>💰 Finance</h2>
+    <div class="goal">☐ Save $1,500 this month</div>
+  </div>
+
+  <div class="goal-section">
+    <h2>💼 Career</h2>
+    <div class="goal">☐ Start taking leads for insurance</div>
+  </div>
+
+  <div class="progress-title">♡ Monthly Progress</div>
+  <div class="bar"><div class="fill"></div></div>
+</div>
+</body>
+</html>
