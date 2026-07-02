@@ -1,370 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>July Success Scorecard</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+*{box-sizing:border-box}
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Georgia, serif;
-  color: #ffd6f2;
+body{
+  margin:0;
+  font-family:Georgia,serif;
+  color:#7b1838;
   background:
-    linear-gradient(rgba(30, 0, 25, 0.68), rgba(30, 0, 25, 0.78)),
+    linear-gradient(rgba(255,170,185,.78),rgba(255,205,210,.82)),
     url("monthly-goals-background.png");
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
+  background-size:cover;
+  background-position:center;
 }
 
-.dashboard {
-  width: 100vw;
-  height: 100vh;
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.wrap{
+  width:100%;
+  max-width:980px;
+  margin:auto;
+  padding:14px;
 }
 
-h1 {
-  margin: 0;
-  text-align: center;
-  font-size: clamp(30px, 4vw, 48px);
-  color: #ff7bdc;
-  text-shadow: 0 0 10px #ff4fc3;
-  letter-spacing: 2px;
+.board{
+  border:1.5px solid rgba(160,35,75,.45);
+  border-radius:18px;
+  background:rgba(255,215,220,.58);
+  box-shadow:0 8px 30px rgba(110,20,50,.18);
+  padding:14px;
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #ffe1f6;
-  margin-top: -4px;
+h1{
+  margin:0;
+  text-align:center;
+  font-size:34px;
+  letter-spacing:3px;
+  color:#8f1f46;
 }
 
-.top-row {
-  display: grid;
-  grid-template-columns: 1.3fr 2fr;
-  gap: 8px;
+.sub{
+  text-align:center;
+  font-size:11px;
+  letter-spacing:2px;
+  margin:4px 0 12px;
 }
 
-.week-row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+.top{
+  display:grid;
+  grid-template-columns:1.1fr 1.6fr;
+  gap:8px;
 }
 
-.main-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-  min-height: 0;
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  margin-top:8px;
 }
 
-.card {
-  border: 2px solid #ff4fc3;
-  border-radius: 14px;
-  background: rgba(35, 0, 35, 0.58);
-  box-shadow: 0 0 14px rgba(255, 79, 195, 0.35);
-  padding: 10px;
-  overflow: hidden;
+.card{
+  background:rgba(255,240,242,.48);
+  border:1px solid rgba(169,40,80,.38);
+  border-radius:12px;
+  padding:10px;
 }
 
-.card h2 {
-  margin: 0 0 6px;
-  font-size: 17px;
-  color: #ff85dd;
+h2{
+  margin:0 0 8px;
+  font-size:18px;
+  color:#9b2850;
 }
 
-.big-percent {
-  font-size: 38px;
-  font-weight: bold;
-  color: #ff8de0;
+.big{
+  font-size:44px;
+  font-weight:bold;
+  margin-bottom:6px;
 }
 
-.progress {
-  width: 100%;
-  height: 9px;
-  border: 1px solid #ff7bdc;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 6px;
+.barbox{
+  height:11px;
+  border:1px solid rgba(169,40,80,.45);
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(255,255,255,.28);
 }
 
-.bar {
-  height: 100%;
-  width: 0%;
-  background: #ff6bd6;
-  border-radius: 20px;
+.bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#f06b98,#ff9ab9);
+  border-radius:30px;
 }
 
-.week-card {
-  text-align: center;
-  padding: 8px;
+.weeks{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:4px;
 }
 
-.week-card h3 {
-  font-size: 13px;
-  margin: 0 0 4px;
+.week{
+  text-align:center;
+  border-right:1px solid rgba(169,40,80,.25);
 }
 
-.circle {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  margin: auto;
-  display: grid;
-  place-items: center;
-  border: 5px solid #ff4fc3;
-  font-size: 13px;
-  font-weight: bold;
+.week:last-child{border-right:0}
+
+.week-title{
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:6px;
 }
 
-.input-line {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 5px;
-  font-size: 12px;
+.circle{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  border:7px solid #ef6f9b;
+  background:rgba(255,235,238,.5);
+  font-size:16px;
+  font-weight:bold;
 }
 
-input[type="number"],
-input[type="text"] {
-  width: 100%;
-  height: 24px;
-  border-radius: 7px;
-  border: 1px solid #ff7bdc;
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffe8f8;
-  padding: 4px 7px;
-  font-size: 12px;
+.row{
+  display:grid;
+  grid-template-columns:1fr 95px;
+  align-items:center;
+  gap:6px;
+  margin-bottom:5px;
+  font-size:13px;
 }
 
-.check-row {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  height: 23px;
-  font-size: 12px;
+input[type="number"]{
+  width:100%;
+  height:25px;
+  border-radius:5px;
+  border:1px solid rgba(169,40,80,.45);
+  background:rgba(255,255,255,.35);
+  color:#7b1838;
+  padding:3px 7px;
 }
 
-.check-row input {
-  accent-color: #ff4fc3;
+.check{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  height:23px;
+  border-bottom:1px solid rgba(169,40,80,.15);
 }
 
-.scroll {
-  max-height: 100%;
-  overflow-y: auto;
-  padding-right: 4px;
+input[type="checkbox"]{
+  accent-color:#ef6f9b;
 }
 
-.mini-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 8px;
+.scroll{
+  max-height:240px;
+  overflow-y:auto;
+  padding-right:4px;
 }
 
-.section-progress {
-  font-size: 12px;
-  margin-top: 5px;
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px 12px;
 }
 
-@media (max-width: 900px) {
-  body {
-    overflow: auto;
-  }
+.score{
+  font-size:13px;
+  margin:8px 0 5px;
+}
 
-  .dashboard {
-    height: auto;
-  }
+.verse{
+  text-align:center;
+  margin-top:12px;
+  font-size:13px;
+  letter-spacing:1.5px;
+}
 
-  .top-row,
-  .main-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .week-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media(max-width:800px){
+  .top,.grid{grid-template-columns:1fr}
+  .weeks{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:28px}
 }
 </style>
 </head>
 
 <body>
-<div class="dashboard">
+<div class="wrap">
+<div class="board">
 
-  <h1>♡ JULY SUCCESS SCORECARD</h1>
-  <div class="subtitle">NO SMOKING • NO DRINKING • NO HOOKAH • NO WEED • DISCIPLINE • GROWTH</div>
+<h1>♡ JULY SUCCESS SCORECARD</h1>
+<div class="sub">NO SMOKING • NO DRINKING • NO HOOKAH • NO WEED • DISCIPLINE • GROWTH</div>
 
-  <div class="top-row">
-    <div class="card">
-      <h2>Overall Monthly Success</h2>
-      <div class="big-percent" id="overallPercent">0%</div>
-      <div class="progress"><div class="bar" id="overallBar"></div></div>
-      <div class="section-progress">Monthly score updates automatically</div>
-    </div>
-
-    <div class="week-row">
-      <div class="card week-card"><h3>Week 1</h3><div class="circle" id="w1">0%</div></div>
-      <div class="card week-card"><h3>Week 2</h3><div class="circle" id="w2">0%</div></div>
-      <div class="card week-card"><h3>Week 3</h3><div class="circle" id="w3">0%</div></div>
-      <div class="card week-card"><h3>Week 4</h3><div class="circle" id="w4">0%</div></div>
-      <div class="card week-card"><h3>Week 5</h3><div class="circle" id="w5">0%</div></div>
-    </div>
+<div class="top">
+  <div class="card">
+    <h2>Overall Monthly Success</h2>
+    <div class="big" id="overallText">0%</div>
+    <div class="barbox"><div class="bar" id="overallBar"></div></div>
+    <div class="score">Monthly score updates automatically</div>
   </div>
 
-  <div class="main-grid">
-
-    <div class="card">
-      <h2>Health</h2>
-      <div class="input-line">Current lbs <input type="number" id="currentWeight" placeholder="272"></div>
-      <div class="input-line">Goal lbs <input type="number" id="goalWeight" placeholder="260"></div>
-      <div class="section-progress" id="weightText">0 / 12 lbs</div>
-      <div class="progress"><div class="bar" id="weightBar"></div></div>
-
-      <h2 style="margin-top:10px;">Lifestyle Reset</h2>
-      <div class="scroll">
-        <div id="habits"></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>LSAT Study</h2>
-      <div class="input-line">Week 1 hours <input type="number" class="study" placeholder="0"></div>
-      <div class="input-line">Week 2 hours <input type="number" class="study" placeholder="0"></div>
-      <div class="input-line">Week 3 hours <input type="number" class="study" placeholder="0"></div>
-      <div class="input-line">Week 4 hours <input type="number" class="study" placeholder="0"></div>
-      <div class="input-line">Week 5 hours <input type="number" class="study" placeholder="0"></div>
-      <div class="section-progress" id="studyText">0 / 40 hrs</div>
-      <div class="progress"><div class="bar" id="studyBar"></div></div>
-
-      <h2 style="margin-top:10px;">Nutrition</h2>
-      <div id="nutrition"></div>
-      <div class="section-progress" id="nutritionText">0%</div>
-      <div class="progress"><div class="bar" id="nutritionBar"></div></div>
-    </div>
-
-    <div class="card">
-      <h2>Finance</h2>
-      <div class="input-line">Goal saved $ <input type="number" id="moneyGoal" placeholder="1000"></div>
-      <div class="input-line">Week 1 saved <input type="number" class="money" placeholder="0"></div>
-      <div class="input-line">Week 2 saved <input type="number" class="money" placeholder="0"></div>
-      <div class="input-line">Week 3 saved <input type="number" class="money" placeholder="0"></div>
-      <div class="input-line">Week 4 saved <input type="number" class="money" placeholder="0"></div>
-      <div class="input-line">Week 5 saved <input type="number" class="money" placeholder="0"></div>
-      <div class="section-progress" id="moneyText">$0 / $1000</div>
-      <div class="progress"><div class="bar" id="moneyBar"></div></div>
-
-      <h2 style="margin-top:10px;">Isaiah School Prep</h2>
-      <div class="mini-grid" id="school"></div>
-      <div class="section-progress" id="schoolText">0 / 10 ready</div>
-      <div class="progress"><div class="bar" id="schoolBar"></div></div>
-    </div>
-
+  <div class="card weeks">
+    <div class="week"><div class="week-title">Week 1</div><div class="circle" id="w1">0%</div></div>
+    <div class="week"><div class="week-title">Week 2</div><div class="circle" id="w2">0%</div></div>
+    <div class="week"><div class="week-title">Week 3</div><div class="circle" id="w3">0%</div></div>
+    <div class="week"><div class="week-title">Week 4</div><div class="circle" id="w4">0%</div></div>
+    <div class="week"><div class="week-title">Week 5</div><div class="circle" id="w5">0%</div></div>
   </div>
 </div>
 
+<div class="grid">
+
+  <div>
+    <div class="card">
+      <h2>Health</h2>
+      <div class="row">Current lbs <input id="currentWeight" type="number" value="272"></div>
+      <div class="row">Goal lbs <input id="goalWeight" type="number" value="260"></div>
+      <div class="score" id="weightScore">0 / 12 lbs</div>
+      <div class="barbox"><div class="bar" id="weightBar"></div></div>
+    </div>
+
+    <div class="card" style="margin-top:8px">
+      <h2>Lifestyle Reset</h2>
+      <div class="scroll" id="habits"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>LSAT Study</h2>
+      <div class="row">Week 1 hours <input class="study" type="number" value="0"></div>
+      <div class="row">Week 2 hours <input class="study" type="number" value="0"></div>
+      <div class="row">Week 3 hours <input class="study" type="number" value="0"></div>
+      <div class="row">Week 4 hours <input class="study" type="number" value="0"></div>
+      <div class="row">Week 5 hours <input class="study" type="number" value="0"></div>
+      <div class="score" id="studyScore">0 / 40 hrs</div>
+      <div class="barbox"><div class="bar" id="studyBar"></div></div>
+    </div>
+
+    <div class="card" style="margin-top:8px">
+      <h2>Nutrition</h2>
+      <div id="nutrition"></div>
+      <div class="score" id="nutritionScore">0%</div>
+      <div class="barbox"><div class="bar" id="nutritionBar"></div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>Finance</h2>
+      <div class="row">Goal saved $ <input id="moneyGoal" type="number" value="1000"></div>
+      <div class="row">Week 1 saved <input class="money" type="number" value="0"></div>
+      <div class="row">Week 2 saved <input class="money" type="number" value="0"></div>
+      <div class="row">Week 3 saved <input class="money" type="number" value="0"></div>
+      <div class="row">Week 4 saved <input class="money" type="number" value="0"></div>
+      <div class="row">Week 5 saved <input class="money" type="number" value="0"></div>
+      <div class="score" id="moneyScore">$0 / $1000</div>
+      <div class="barbox"><div class="bar" id="moneyBar"></div></div>
+    </div>
+
+    <div class="card" style="margin-top:8px">
+      <h2>Isaiah School Prep</h2>
+      <div class="two" id="school"></div>
+      <div class="score" id="schoolScore">0 / 10 ready</div>
+      <div class="barbox"><div class="bar" id="schoolBar"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="verse">✝ TRUST IN THE LORD WITH ALL YOUR HEART AND LEAN NOT ON YOUR OWN UNDERSTANDING. PROVERBS 3:5-6 ♡</div>
+
+</div>
+</div>
+
 <script>
-const habits = [
-  "No smoking", "No hookah", "No weed", "No liquor",
-  "Workout", "Water", "Prayer", "Bible",
-  "Stretch", "Journal", "No fast food", "Early bedtime",
-  "Clean room", "Study", "Walk", "Budget check"
+const habits=[
+"No smoking","No hookah","No weed","No liquor","Workout","Water","Prayer","Bible",
+"Stretch","Journal","No fast food","Early bedtime","Clean room","Study","Walk","Budget check"
 ];
 
-const nutrition = [
-  "Week 1 no fast food",
-  "Week 2 no fast food",
-  "Week 3 no fast food",
-  "Week 4 no fast food",
-  "Week 5 no fast food"
+const nutrition=[
+"Week 1 no fast food","Week 2 no fast food","Week 3 no fast food",
+"Week 4 no fast food","Week 5 no fast food"
 ];
 
-const school = [
-  "Backpack", "Lunchbox", "Pencils", "Folder", "Headphones",
-  "Shoes", "Clothes", "Crayons", "Notebook", "Water bottle"
+const school=[
+"Backpack","Lunchbox","Pencils","Folder","Headphones",
+"Shoes","Clothes","Crayons","Notebook","Water bottle"
 ];
 
-function makeChecks(list, containerId, className) {
-  const box = document.getElementById(containerId);
-  list.forEach(item => {
-    const row = document.createElement("label");
-    row.className = "check-row";
-    row.innerHTML = `<input type="checkbox" class="${className}"> ${item}`;
-    box.appendChild(row);
+function checks(list,id,cls){
+  const box=document.getElementById(id);
+  list.forEach(x=>{
+    box.innerHTML+=`<label class="check"><input type="checkbox" class="${cls}"> ${x}</label>`;
   });
 }
 
-makeChecks(habits, "habits", "habit");
-makeChecks(nutrition, "nutrition", "nutrition");
-makeChecks(school, "school", "school");
+checks(habits,"habits","habit");
+checks(nutrition,"nutrition","nutrition");
+checks(school,"school","school");
 
-function percent(done, total) {
-  return total === 0 ? 0 : Math.min(100, Math.round((done / total) * 100));
-}
+function pct(a,b){return Math.min(100,Math.round((a/b)*100)||0)}
 
-function update() {
-  let scores = [];
+function update(){
+  let scores=[];
 
-  const current = Number(document.getElementById("currentWeight").value || 272);
-  const goal = Number(document.getElementById("goalWeight").value || 260);
-  const start = 272;
-  const lost = Math.max(0, start - current);
-  const targetLoss = Math.max(1, start - goal);
-  const weightP = percent(lost, targetLoss);
-  document.getElementById("weightBar").style.width = weightP + "%";
-  document.getElementById("weightText").textContent = `${lost} / ${targetLoss} lbs`;
+  let start=272;
+  let current=+document.getElementById("currentWeight").value||272;
+  let goal=+document.getElementById("goalWeight").value||260;
+  let lost=Math.max(0,start-current);
+  let target=Math.max(1,start-goal);
+  let weightP=pct(lost,target);
+  weightBar.style.width=weightP+"%";
+  weightScore.textContent=`${lost} / ${target} lbs`;
   scores.push(weightP);
 
-  const studyTotal = [...document.querySelectorAll(".study")].reduce((a, b) => a + Number(b.value || 0), 0);
-  const studyP = percent(studyTotal, 40);
-  document.getElementById("studyBar").style.width = studyP + "%";
-  document.getElementById("studyText").textContent = `${studyTotal} / 40 hrs`;
+  let study=[...document.querySelectorAll(".study")].reduce((a,b)=>a+(+b.value||0),0);
+  let studyP=pct(study,40);
+  studyBar.style.width=studyP+"%";
+  studyScore.textContent=`${study} / 40 hrs`;
   scores.push(studyP);
 
-  const moneyGoal = Number(document.getElementById("moneyGoal").value || 1000);
-  const moneyTotal = [...document.querySelectorAll(".money")].reduce((a, b) => a + Number(b.value || 0), 0);
-  const moneyP = percent(moneyTotal, moneyGoal);
-  document.getElementById("moneyBar").style.width = moneyP + "%";
-  document.getElementById("moneyText").textContent = `$${moneyTotal} / $${moneyGoal}`;
+  let money=[...document.querySelectorAll(".money")].reduce((a,b)=>a+(+b.value||0),0);
+  let goalMoney=+moneyGoal.value||1000;
+  let moneyP=pct(money,goalMoney);
+  moneyBar.style.width=moneyP+"%";
+  moneyScore.textContent=`$${money} / $${goalMoney}`;
   scores.push(moneyP);
 
-  const habitDone = document.querySelectorAll(".habit:checked").length;
-  const habitP = percent(habitDone, habits.length);
+  let habitP=pct(document.querySelectorAll(".habit:checked").length,habits.length);
   scores.push(habitP);
 
-  const nutritionDone = document.querySelectorAll(".nutrition:checked").length;
-  const nutritionP = percent(nutritionDone, nutrition.length);
-  document.getElementById("nutritionBar").style.width = nutritionP + "%";
-  document.getElementById("nutritionText").textContent = nutritionP + "%";
+  let nutritionP=pct(document.querySelectorAll(".nutrition:checked").length,nutrition.length);
+  nutritionBar.style.width=nutritionP+"%";
+  nutritionScore.textContent=nutritionP+"%";
   scores.push(nutritionP);
 
-  const schoolDone = document.querySelectorAll(".school:checked").length;
-  const schoolP = percent(schoolDone, school.length);
-  document.getElementById("schoolBar").style.width = schoolP + "%";
-  document.getElementById("schoolText").textContent = `${schoolDone} / ${school.length} ready`;
+  let schoolDone=document.querySelectorAll(".school:checked").length;
+  let schoolP=pct(schoolDone,school.length);
+  schoolBar.style.width=schoolP+"%";
+  schoolScore.textContent=`${schoolDone} / ${school.length} ready`;
   scores.push(schoolP);
 
-  const overall = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
-  document.getElementById("overallPercent").textContent = overall + "%";
-  document.getElementById("overallBar").style.width = overall + "%";
+  let overall=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
+  overallText.textContent=overall+"%";
+  overallBar.style.width=overall+"%";
 
-  for (let i = 1; i <= 5; i++) {
-    document.getElementById("w" + i).textContent = overall + "%";
+  for(let i=1;i<=5;i++){
+    document.getElementById("w"+i).textContent=overall+"%";
   }
 }
 
-document.addEventListener("input", update);
-document.addEventListener("change", update);
+document.addEventListener("input",update);
+document.addEventListener("change",update);
 update();
 </script>
+
 </body>
 </html>
