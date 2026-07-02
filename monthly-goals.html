@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monthly Goals</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>July Success Scorecard</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
@@ -15,72 +15,65 @@ body{
   font-family:Poppins,sans-serif;
   color:white;
   background:
-    linear-gradient(rgba(20,0,25,.45),rgba(10,0,15,.75)),
+    linear-gradient(rgba(18,0,18,.45),rgba(8,0,12,.78)),
     url("monthly-goals-background.png");
   background-size:cover;
   background-position:center;
   overflow:hidden;
 }
 
-.dashboard{
+.app{
   width:100%;
-  max-width:950px;
-  height:700px;
+  max-width:980px;
+  height:720px;
   margin:auto;
   padding:12px;
-  transform:scale(.9);
+  transform:scale(.92);
   transform-origin:top center;
 }
 
 .header{text-align:center;margin-bottom:8px}
 
-.header h1{
+h1{
   margin:0;
   font-family:'Playfair Display',serif;
   font-size:38px;
-  letter-spacing:3px;
+  letter-spacing:2px;
   color:#ff8bd2;
   text-shadow:0 0 15px #ff4fbc;
 }
 
-.header p{
-  margin:3px 0 8px;
+.tagline{
   font-size:11px;
-  letter-spacing:3px;
-}
-
-.month-pill{
-  display:inline-block;
-  padding:5px 18px;
-  border:1px solid #ff80cf;
-  border-radius:25px;
-  background:rgba(20,0,25,.55);
-  font-size:12px;
+  letter-spacing:2px;
+  margin-top:2px;
 }
 
 .card{
-  background:rgba(20,0,25,.72);
-  border:1px solid rgba(255,130,210,.45);
-  border-radius:15px;
-  padding:11px;
-  box-shadow:0 0 22px rgba(255,70,180,.18);
+  background:rgba(18,0,22,.74);
+  border:1px solid rgba(255,125,205,.42);
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 0 18px rgba(255,60,180,.18);
   backdrop-filter:blur(8px);
 }
 
-.overall{
-  text-align:center;
-  margin-bottom:10px;
+.top{
+  display:grid;
+  grid-template-columns:1fr 1.3fr;
+  gap:8px;
+  margin-bottom:8px;
 }
 
 .percent{
   font-family:'Playfair Display',serif;
-  font-size:38px;
+  font-size:46px;
   color:#ff9bdc;
 }
 
 .progress{
   height:8px;
-  background:rgba(255,255,255,.16);
+  background:rgba(255,255,255,.14);
   border-radius:20px;
   overflow:hidden;
   margin:6px 0;
@@ -89,347 +82,392 @@ body{
 .bar{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#ff60c2,#ffc1eb);
+  background:linear-gradient(90deg,#ff5fbe,#ffc1e9);
   border-radius:20px;
-  transition:.3s;
+}
+
+.weeks{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+}
+
+.weekCircle{
+  text-align:center;
+  font-size:11px;
+}
+
+.circle{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:6px solid rgba(255,255,255,.13);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:4px auto;
+  color:#ff9bdc;
+  font-weight:700;
+  box-shadow:0 0 12px rgba(255,88,190,.2);
 }
 
 .grid{
   display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:10px;
-}
-
-.section{
-  padding:7px 0;
-  border-bottom:1px solid rgba(255,255,255,.13);
-}
-
-.section:last-child{border-bottom:none}
-
-.section-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.section h2{
-  margin:0 0 4px;
-  font-family:'Playfair Display',serif;
-  color:#ff9bdc;
-  font-size:20px;
-}
-
-.goal{
-  display:block;
-  font-size:12px;
-  margin:4px 0;
-}
-
-input[type="checkbox"]{
-  accent-color:#ff75c8;
-  transform:scale(1.05);
-}
-
-.week{
-  padding:7px;
-  margin:5px 0;
-  border:1px solid rgba(255,140,215,.3);
-  border-radius:12px;
-  background:rgba(255,255,255,.05);
-}
-
-.week-title{
-  color:#ff9bdc;
-  font-weight:600;
-  font-size:12px;
-  margin-bottom:4px;
-}
-
-.week-options{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-}
-
-.reflection{
-  margin-top:10px;
-}
-
-.reflection h2,
-.card h2{
-  font-family:'Playfair Display',serif;
-  color:#ff9bdc;
-  font-size:20px;
-  margin:0 0 8px;
-}
-
-.reflection label{
-  font-size:11px;
-  color:#ffd1ef;
-}
-
-textarea{
-  width:100%;
-  height:38px;
-  background:transparent;
-  border:none;
-  border-bottom:1px solid rgba(255,150,220,.4);
-  color:white;
-  outline:none;
-  resize:none;
-  font-size:12px;
-}
-
-.summary{
-  margin-top:10px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:6px;
-}
-
-.stat{
-  text-align:center;
-  padding:7px;
-  border-radius:10px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,145,214,.25);
-  font-size:10px;
-}
-
-.stat strong{
-  display:block;
-  font-size:18px;
-  color:#ff8bd2;
-}
-
-.footer{
-  margin-top:10px;
-  display:grid;
-  grid-template-columns:1fr 2fr 1fr;
+  grid-template-columns:repeat(3,1fr);
   gap:8px;
 }
 
-.quote{
-  text-align:center;
+h2{
+  margin:0 0 6px;
   font-family:'Playfair Display',serif;
+  font-size:18px;
+  color:#ff9bdc;
+}
+
+.small{font-size:11px;color:#ffd1ef}
+
+input,select{
+  width:100%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,150,220,.35);
+  color:white;
+  border-radius:8px;
+  padding:5px;
+  font-size:12px;
+  margin:3px 0;
+}
+
+select option{color:black}
+
+.row{
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:5px;
+  align-items:center;
+  font-size:12px;
+}
+
+.result{
+  font-size:13px;
+  color:#ffb8e8;
+  margin-top:4px;
+}
+
+.supplies{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px 6px;
+  font-size:11px;
+}
+
+.supplies label{display:block}
+
+input[type="checkbox"]{
+  width:auto;
+  accent-color:#ff72c7;
+}
+
+.summary{
+  margin-top:8px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:11px;
+}
+
+th,td{
+  border:1px solid rgba(255,140,215,.2);
+  padding:4px;
+  text-align:center;
+}
+
+th{color:#ff9bdc}
+
+.footer{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  margin-top:8px;
+  text-align:center;
   font-size:12px;
 }
 
 button{
-  margin-top:8px;
+  margin-top:6px;
   border:none;
-  background:#ff75c8;
+  background:#ff73c8;
   color:white;
-  border-radius:20px;
-  padding:7px 14px;
-  cursor:pointer;
+  border-radius:18px;
+  padding:6px 12px;
   font-size:12px;
+  cursor:pointer;
 }
 
-@media(max-width:800px){
-  .dashboard{
-    transform:scale(.82);
-  }
+@media(max-width:850px){
+  .app{transform:scale(.82)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="dashboard">
+<div class="app">
 
   <div class="header">
-    <h1>♡ JULY GOALS</h1>
-    <p>DISCIPLINE • CONSISTENCY • GROWTH</p>
-    <div class="month-pill">JULY 2026</div>
+    <h1>♡ JULY SUCCESS SCORECARD</h1>
+    <div class="tagline">NO SMOKING • NO DRINKING • NO HOOKAH • NO WEED • DISCIPLINE • GROWTH</div>
   </div>
 
-  <div class="card overall">
-    <div>OVERALL PROGRESS</div>
-    <div class="percent" id="overallPercent">0%</div>
-    <div class="progress"><div class="bar" id="overallBar"></div></div>
-    <small>You’re doing amazing. Keep going ♡</small>
+  <div class="top">
+    <div class="card">
+      <h2>Overall Monthly Success</h2>
+      <div class="percent" id="overall">0%</div>
+      <div class="progress"><div class="bar" id="overallBar"></div></div>
+      <div class="small">Weekly wins create monthly success ♡</div>
+    </div>
+
+    <div class="card">
+      <div class="weeks">
+        <div class="weekCircle">Week 1<div class="circle" id="w1">0%</div></div>
+        <div class="weekCircle">Week 2<div class="circle" id="w2">0%</div></div>
+        <div class="weekCircle">Week 3<div class="circle" id="w3">0%</div></div>
+        <div class="weekCircle">Week 4<div class="circle" id="w4">0%</div></div>
+        <div class="weekCircle">Week 5<div class="circle" id="w5">0%</div></div>
+      </div>
+    </div>
   </div>
 
   <div class="grid">
 
-    <div>
-      <div class="card">
-
-        <div class="section">
-          <div class="section-top"><h2>HEALTH</h2><span class="cat-percent">0%</span></div>
-          <label class="goal"><input type="checkbox" class="goal-check"> Lose 5 pounds this month</label>
-          <label class="goal"><input type="checkbox" class="goal-check"> Exercise 5 days a week</label>
-          <div class="progress"><div class="bar cat-bar"></div></div>
-        </div>
-
-        <div class="section">
-          <div class="section-top"><h2>LSAT</h2><span class="cat-percent">0%</span></div>
-          <label class="goal"><input type="checkbox" class="goal-check"> Study 10 hours a week</label>
-          <label class="goal"><input type="checkbox" class="goal-check"> Complete 2 practice tests</label>
-          <label class="goal"><input type="checkbox" class="goal-check"> Review weak areas</label>
-          <div class="progress"><div class="bar cat-bar"></div></div>
-        </div>
-
-        <div class="section">
-          <div class="section-top"><h2>FINANCE</h2><span class="cat-percent">0%</span></div>
-          <label class="goal"><input type="checkbox" class="goal-check"> Save $1,500 this month</label>
-          <label class="goal"><input type="checkbox" class="goal-check"> No impulse spending</label>
-          <label class="goal"><input type="checkbox" class="goal-check"> Track daily expenses</label>
-          <div class="progress"><div class="bar cat-bar"></div></div>
-        </div>
-
-        <div class="section">
-          <div class="section-top"><h2>CAREER</h2><span class="cat-percent">0%</span></div>
-          <label class="goal"><input type="checkbox" class="goal-check"> Start taking insurance leads</label>
-          <label class="goal"><input type="checkbox" class="goal-check"> Follow up with 20 leads</label>
-          <label class="goal"><input type="checkbox" class="goal-check"> Create content 3x a week</label>
-          <div class="progress"><div class="bar cat-bar"></div></div>
-        </div>
-
-      </div>
-
-      <div class="card summary">
-        <h2>MONTHLY SUMMARY</h2>
-        <div class="stats">
-          <div class="stat"><strong id="streak">0</strong>days</div>
-          <div class="stat"><strong id="completed">0</strong>done</div>
-          <div class="stat"><strong id="totalGoals">0</strong>goals</div>
-          <div class="stat"><strong id="currentWeek">Week 1</strong>now</div>
-        </div>
-      </div>
+    <div class="card">
+      <h2>Health</h2>
+      <div class="small">Goal: Lose 5 lbs</div>
+      <div class="row"><span>Start</span><input id="startWeight" type="number" placeholder="272"></div>
+      <div class="row"><span>Now</span><input id="currentWeight" type="number" placeholder="270"></div>
+      <div class="result" id="healthResult">0 / 5 lbs</div>
+      <div class="progress"><div class="bar" id="healthBar"></div></div>
     </div>
 
-    <div>
-      <div class="card">
-        <h2>WEEKLY CHECK-IN</h2>
-
-        <div class="week"><div class="week-title">WEEK 1 · JUN 30 - JUL 6</div><div class="week-options"><label><input type="checkbox" class="week-check"> Planned</label><label><input type="checkbox" class="week-check"> Done</label></div></div>
-        <div class="week"><div class="week-title">WEEK 2 · JUL 7 - JUL 13</div><div class="week-options"><label><input type="checkbox" class="week-check"> Planned</label><label><input type="checkbox" class="week-check"> Done</label></div></div>
-        <div class="week"><div class="week-title">WEEK 3 · JUL 14 - JUL 20</div><div class="week-options"><label><input type="checkbox" class="week-check"> Planned</label><label><input type="checkbox" class="week-check"> Done</label></div></div>
-        <div class="week"><div class="week-title">WEEK 4 · JUL 21 - JUL 27</div><div class="week-options"><label><input type="checkbox" class="week-check"> Planned</label><label><input type="checkbox" class="week-check"> Done</label></div></div>
-        <div class="week"><div class="week-title">WEEK 5 · JUL 28 - AUG 3</div><div class="week-options"><label><input type="checkbox" class="week-check"> Planned</label><label><input type="checkbox" class="week-check"> Done</label></div></div>
-      </div>
-
-      <div class="card reflection">
-        <h2>WEEKLY REFLECTION</h2>
-        <label>This week I did well with:</label>
-        <textarea id="reflect1"></textarea>
-        <label>This week I need to improve:</label>
-        <textarea id="reflect2"></textarea>
-        <label>Next week focus:</label>
-        <textarea id="reflect3"></textarea>
-      </div>
+    <div class="card">
+      <h2>LSAT Study</h2>
+      <div class="small">Goal: 40 hours/month</div>
+      <input class="lsat" type="number" placeholder="Week 1 hours">
+      <input class="lsat" type="number" placeholder="Week 2 hours">
+      <input class="lsat" type="number" placeholder="Week 3 hours">
+      <input class="lsat" type="number" placeholder="Week 4 hours">
+      <input class="lsat" type="number" placeholder="Week 5 hours">
+      <div class="result" id="lsatResult">0 / 40 hrs</div>
+      <div class="progress"><div class="bar" id="lsatBar"></div></div>
     </div>
 
+    <div class="card">
+      <h2>Finance</h2>
+      <div class="small">Goal: Save $1,500</div>
+      <input class="money" type="number" placeholder="Week 1 saved">
+      <input class="money" type="number" placeholder="Week 2 saved">
+      <input class="money" type="number" placeholder="Week 3 saved">
+      <input class="money" type="number" placeholder="Week 4 saved">
+      <input class="money" type="number" placeholder="Week 5 saved">
+      <div class="result" id="moneyResult">$0 / $1500</div>
+      <div class="progress"><div class="bar" id="moneyBar"></div></div>
+    </div>
+
+    <div class="card">
+      <h2>Lifestyle Reset</h2>
+      <div class="small">Each week: answer Yes/No</div>
+      <div id="lifestyleBox"></div>
+      <div class="result" id="lifeResult">0%</div>
+      <div class="progress"><div class="bar" id="lifeBar"></div></div>
+    </div>
+
+    <div class="card">
+      <h2>Nutrition</h2>
+      <div class="small">Goal: No fast food / ordering out</div>
+      <input class="fastfood" type="number" placeholder="Week 1 times">
+      <input class="fastfood" type="number" placeholder="Week 2 times">
+      <input class="fastfood" type="number" placeholder="Week 3 times">
+      <input class="fastfood" type="number" placeholder="Week 4 times">
+      <input class="fastfood" type="number" placeholder="Week 5 times">
+      <div class="result" id="foodResult">0%</div>
+      <div class="progress"><div class="bar" id="foodBar"></div></div>
+    </div>
+
+    <div class="card">
+      <h2>Isaiah School Prep</h2>
+      <div class="small">Goal: Ready by August 1</div>
+      <div class="supplies">
+        <label><input class="supply" type="checkbox"> Backpack</label>
+        <label><input class="supply" type="checkbox"> Lunchbox</label>
+        <label><input class="supply" type="checkbox"> Uniforms</label>
+        <label><input class="supply" type="checkbox"> Shoes</label>
+        <label><input class="supply" type="checkbox"> Pencils</label>
+        <label><input class="supply" type="checkbox"> Crayons</label>
+        <label><input class="supply" type="checkbox"> Folders</label>
+        <label><input class="supply" type="checkbox"> Notebook</label>
+        <label><input class="supply" type="checkbox"> Headphones</label>
+        <label><input class="supply" type="checkbox"> Water Bottle</label>
+      </div>
+      <div class="result" id="schoolResult">0 / 10 ready</div>
+      <div class="progress"><div class="bar" id="schoolBar"></div></div>
+    </div>
+
+  </div>
+
+  <div class="card summary">
+    <h2>Weekly Summary</h2>
+    <table>
+      <tr>
+        <th>Category</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th>
+      </tr>
+      <tr><td>LSAT</td><td id="ls1">0%</td><td id="ls2">0%</td><td id="ls3">0%</td><td id="ls4">0%</td><td id="ls5">0%</td></tr>
+      <tr><td>Finance</td><td id="mo1">0%</td><td id="mo2">0%</td><td id="mo3">0%</td><td id="mo4">0%</td><td id="mo5">0%</td></tr>
+      <tr><td>Lifestyle</td><td id="li1">0%</td><td id="li2">0%</td><td id="li3">0%</td><td id="li4">0%</td><td id="li5">0%</td></tr>
+      <tr><td>Food</td><td id="fo1">0%</td><td id="fo2">0%</td><td id="fo3">0%</td><td id="fo4">0%</td><td id="fo5">0%</td></tr>
+      <tr><td>Weekly Score</td><td id="ws1">0%</td><td id="ws2">0%</td><td id="ws3">0%</td><td id="ws4">0%</td><td id="ws5">0%</td></tr>
+    </table>
   </div>
 
   <div class="footer">
-    <div class="card quote">TODAY<br><strong id="today"></strong></div>
-    <div class="card quote">“Commit your work to the Lord, and your plans will be established.”<br>— Proverbs 16:3 ♡</div>
-    <div class="card quote">DAYS LEFT<br><strong id="daysLeft"></strong></div>
+    <div class="card">Daily Reminder<br><b>Discipline today, freedom tomorrow.</b></div>
+    <div class="card">This Month’s Focus<br><b>Stay consistent. Protect your peace.</b></div>
+    <div class="card">My Why<br><b>My son. My future. My freedom.</b></div>
   </div>
 
   <div style="text-align:center;">
-    <button onclick="resetDashboard()">Reset Month</button>
+    <button onclick="resetAll()">Reset</button>
   </div>
 
 </div>
 
 <script>
-const STORAGE_KEY="pinkMonthlyGoalsCompact";
+const KEY="julySuccessScorecardV1";
 
-function saveData(){
-  const data={
-    checks:[...document.querySelectorAll("input[type='checkbox']")].map(c=>c.checked),
-    reflections:[
-      document.getElementById("reflect1").value,
-      document.getElementById("reflect2").value,
-      document.getElementById("reflect3").value
-    ]
-  };
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+const lifeBox=document.getElementById("lifestyleBox");
+for(let w=1;w<=5;w++){
+  lifeBox.innerHTML+=`
+    <div class="small">Week ${w}</div>
+    <select class="life"><option value="">Smoke?</option><option>No</option><option>Yes</option></select>
+    <select class="life"><option value="">Weed?</option><option>No</option><option>Yes</option></select>
+    <select class="life"><option value="">Drink?</option><option>No</option><option>Yes</option></select>
+    <select class="life"><option value="">Hookah?</option><option>No</option><option>Yes</option></select>
+  `;
 }
 
-function loadData(){
-  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");
+function num(v){return Number(v)||0}
+function pct(v){return Math.max(0,Math.min(100,Math.round(v)))}
 
-  if(saved.checks){
-    document.querySelectorAll("input[type='checkbox']").forEach((c,i)=>{
-      c.checked=saved.checks[i]||false;
+function update(){
+  const start=num(startWeight.value);
+  const now=num(currentWeight.value);
+  const lost=Math.max(0,start-now);
+  const healthPct=pct((lost/5)*100);
+  healthResult.textContent=`${lost.toFixed(1)} / 5 lbs`;
+  healthBar.style.width=healthPct+"%";
+
+  const lsat=[...document.querySelectorAll(".lsat")].map(i=>num(i.value));
+  const lsatTotal=lsat.reduce((a,b)=>a+b,0);
+  const lsatPct=pct((lsatTotal/40)*100);
+  lsatResult.textContent=`${lsatTotal} / 40 hrs`;
+  lsatBar.style.width=lsatPct+"%";
+
+  const money=[...document.querySelectorAll(".money")].map(i=>num(i.value));
+  const moneyTotal=money.reduce((a,b)=>a+b,0);
+  const moneyPct=pct((moneyTotal/1500)*100);
+  moneyResult.textContent=`$${moneyTotal} / $1500`;
+  moneyBar.style.width=moneyPct+"%";
+
+  const food=[...document.querySelectorAll(".fastfood")].map(i=>i.value===""?null:num(i.value));
+  const foodScores=food.map(v=>{
+    if(v===null)return 0;
+    if(v===0)return 100;
+    if(v===1)return 75;
+    if(v===2)return 50;
+    return 0;
+  });
+  const foodAvg=pct(foodScores.reduce((a,b)=>a+b,0)/5);
+  foodResult.textContent=foodAvg+"%";
+  foodBar.style.width=foodAvg+"%";
+
+  const life=[...document.querySelectorAll(".life")].map(s=>s.value);
+  let lifeScores=[];
+  for(let i=0;i<5;i++){
+    const week=life.slice(i*4,i*4+4);
+    if(week.every(v=>v==="")) lifeScores.push(0);
+    else lifeScores.push(pct((week.filter(v=>v==="No").length/4)*100));
+  }
+  const lifeAvg=pct(lifeScores.reduce((a,b)=>a+b,0)/5);
+  lifeResult.textContent=lifeAvg+"%";
+  lifeBar.style.width=lifeAvg+"%";
+
+  const supplies=[...document.querySelectorAll(".supply")];
+  const supplyDone=supplies.filter(c=>c.checked).length;
+  const schoolPct=pct((supplyDone/supplies.length)*100);
+  schoolResult.textContent=`${supplyDone} / ${supplies.length} ready`;
+  schoolBar.style.width=schoolPct+"%";
+
+  let weekScores=[];
+  for(let i=0;i<5;i++){
+    const ls=pct((lsat[i]/10)*100);
+    const mo=pct((money[i]/300)*100);
+    const li=lifeScores[i];
+    const fo=foodScores[i];
+    const score=pct((ls+mo+li+fo+schoolPct+healthPct)/6);
+    weekScores.push(score);
+
+    document.getElementById("ls"+(i+1)).textContent=ls+"%";
+    document.getElementById("mo"+(i+1)).textContent=mo+"%";
+    document.getElementById("li"+(i+1)).textContent=li+"%";
+    document.getElementById("fo"+(i+1)).textContent=fo+"%";
+    document.getElementById("ws"+(i+1)).textContent=score+"%";
+    document.getElementById("w"+(i+1)).textContent=score+"%";
+  }
+
+  const overallPct=pct(weekScores.reduce((a,b)=>a+b,0)/5);
+  overall.textContent=overallPct+"%";
+  overallBar.style.width=overallPct+"%";
+
+  save();
+}
+
+function save(){
+  const data={
+    inputs:[...document.querySelectorAll("input")].map(i=>i.type==="checkbox"?i.checked:i.value),
+    selects:[...document.querySelectorAll("select")].map(s=>s.value)
+  };
+  localStorage.setItem(KEY,JSON.stringify(data));
+}
+
+function load(){
+  const data=JSON.parse(localStorage.getItem(KEY)||"{}");
+  if(data.inputs){
+    document.querySelectorAll("input").forEach((i,n)=>{
+      if(i.type==="checkbox")i.checked=data.inputs[n]||false;
+      else i.value=data.inputs[n]||"";
     });
   }
-
-  if(saved.reflections){
-    document.getElementById("reflect1").value=saved.reflections[0]||"";
-    document.getElementById("reflect2").value=saved.reflections[1]||"";
-    document.getElementById("reflect3").value=saved.reflections[2]||"";
+  if(data.selects){
+    document.querySelectorAll("select").forEach((s,n)=>s.value=data.selects[n]||"");
   }
 }
 
-function updateProgress(){
-  const goalChecks=[...document.querySelectorAll(".goal-check")];
-  const completed=goalChecks.filter(c=>c.checked).length;
-  const total=goalChecks.length;
-  const overall=total?Math.round((completed/total)*100):0;
-
-  document.getElementById("overallPercent").textContent=overall+"%";
-  document.getElementById("overallBar").style.width=overall+"%";
-  document.getElementById("completed").textContent=completed;
-  document.getElementById("totalGoals").textContent=total;
-
-  document.querySelectorAll(".section").forEach(section=>{
-    const checks=[...section.querySelectorAll(".goal-check")];
-    const done=checks.filter(c=>c.checked).length;
-    const percent=checks.length?Math.round((done/checks.length)*100):0;
-
-    section.querySelector(".cat-percent").textContent=percent+"%";
-    section.querySelector(".cat-bar").style.width=percent+"%";
+function resetAll(){
+  if(!confirm("Reset scorecard?"))return;
+  localStorage.removeItem(KEY);
+  document.querySelectorAll("input").forEach(i=>{
+    if(i.type==="checkbox")i.checked=false;
+    else i.value="";
   });
-
-  const weekDone=[...document.querySelectorAll(".week-check")]
-    .filter((c,i)=>i%2===1&&c.checked).length;
-
-  document.getElementById("streak").textContent=weekDone*3;
-  document.getElementById("currentWeek").textContent="Week "+Math.max(1,weekDone+1);
-
-  saveData();
+  document.querySelectorAll("select").forEach(s=>s.value="");
+  update();
 }
 
-function updateDate(){
-  const now=new Date();
+document.addEventListener("input",update);
+document.addEventListener("change",update);
 
-  document.getElementById("today").textContent=now.toLocaleDateString("en-US",{
-    month:"short",
-    day:"numeric",
-    weekday:"short"
-  });
-
-  const endJuly=new Date(2026,6,31);
-  const diff=Math.max(0,Math.ceil((endJuly-now)/(1000*60*60*24)));
-  document.getElementById("daysLeft").textContent=diff+" days";
-}
-
-function resetDashboard(){
-  if(!confirm("Reset all monthly goals?"))return;
-  localStorage.removeItem(STORAGE_KEY);
-  document.querySelectorAll("input[type='checkbox']").forEach(c=>c.checked=false);
-  document.querySelectorAll("textarea").forEach(t=>t.value="");
-  updateProgress();
-}
-
-document.querySelectorAll("input[type='checkbox'], textarea").forEach(el=>{
-  el.addEventListener("input",updateProgress);
-  el.addEventListener("change",updateProgress);
-});
-
-loadData();
-updateProgress();
-updateDate();
+load();
+update();
 </script>
 
 </body>
