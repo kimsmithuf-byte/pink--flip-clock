@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Monthly Goals</title>
+
 <style>
 html, body {
   margin: 0;
@@ -32,62 +33,75 @@ body {
 
 .title {
   color: #f4a6bd;
-  font-size: 44px;
+  font-size: 34px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .subtitle {
   color: #f4a6bd;
-  font-size: 18px;
+  font-size: 13px;
   letter-spacing: 2px;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .goal-section {
   text-align: left;
-  margin: 16px auto;
+  margin: 11px auto;
   width: 82%;
 }
 
 .goal-section h2 {
   color: #f4a6bd;
-  font-size: 24px;
-  margin-bottom: 8px;
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .goal {
-  font-size: 20px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.45;
 }
 
 .progress-title {
   color: #f4a6bd;
-  font-size: 22px;
-  margin-top: 26px;
-  margin-bottom: 12px;
+  font-size: 17px;
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.progress-item {
+  width: 82%;
+  margin: 8px auto;
+  text-align: left;
+  font-size: 13px;
+  color: #fff1e6;
 }
 
 .bar {
-  width: 82%;
-  height: 12px;
+  width: 100%;
+  height: 9px;
   border: 1px solid #f4a6bd;
   border-radius: 20px;
-  margin: 8px auto 16px;
+  margin-top: 4px;
   overflow: hidden;
 }
 
 .fill {
-  width: 35%;
   height: 100%;
   background: #f4a6bd;
-  box-shadow: 0 0 15px #f4a6bd;
+  box-shadow: 0 0 12px #f4a6bd;
 }
+
+.health { width: 25%; }
+.lsat { width: 40%; }
+.finance { width: 20%; }
+.career { width: 10%; }
 </style>
 </head>
 
 <body>
 <div class="content">
+
   <div class="title">♡ JULY GOALS</div>
   <div class="subtitle">DISCIPLINE • CONSISTENCY • GROWTH</div>
 
@@ -113,7 +127,27 @@ body {
   </div>
 
   <div class="progress-title">♡ Monthly Progress</div>
-  <div class="bar"><div class="fill"></div></div>
+
+  <div class="progress-item">
+    Health
+    <div class="bar"><div class="fill health"></div></div>
+  </div>
+
+  <div class="progress-item">
+    LSAT
+    <div class="bar"><div class="fill lsat"></div></div>
+  </div>
+
+  <div class="progress-item">
+    Finance
+    <div class="bar"><div class="fill finance"></div></div>
+  </div>
+
+  <div class="progress-item">
+    Career
+    <div class="bar"><div class="fill career"></div></div>
+  </div>
+
 </div>
 </body>
 </html>
